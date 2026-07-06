@@ -42,6 +42,8 @@ $color-danger:        #d9483d;
 // --- Farver: knapper ---
 $color-btn-primary:       #f29719;
 $color-btn-primary-hover: #d6862a;
+$color-gender-female:     #d98fae;
+$color-gender-male:       #4a7fa6;
 
 // --- Spacing ---
 $spacing-xs:  0.25rem;
@@ -53,6 +55,8 @@ $spacing-xl:  2.5rem;
 // --- Størrelser ---
 $size-dot:              10px;    // farvet status-prik
 $size-character-icon:   60px;    // karaktervalg-ikoner på startskærm
+$size-gender-icon:      56px;    // kønssymbol-knapperne
+$size-stage-height:     260px;   // højden på baggrund+karakter-visningen
 $size-screen-min-height:          320px;  // min-højde på computer-window__body (mobil)
 $size-screen-min-height-desktop:  420px;  // min-højde på computer-window__body (computer)
 
@@ -195,7 +199,7 @@ body {
 img {
   max-width: 100%;
   display: block;
-  image-rendering: pixelated;
+  image-rendering: pixelated; // holder pixel-art skarp, når den skaleres op
 }
 
 button {
@@ -318,35 +322,36 @@ button {
       color: $color-text-dark;
     }
 
-    &__label {
-      font-size: $font-size-body;
-      color: $color-text-dark;
-      margin-bottom: $spacing-sm;
-    }
-
     &__character-select,
     &__name-input {
       width: 100%;
     }
   }
 
-  .character-picker {
-    display: flex;
-    justify-content: center;
-    gap: $spacing-md;
+  // Baggrund + karakter-GIF lagt oven på hinanden
+  .start__stage {
+    position: relative;
+    width: 100%;
+    height: $size-stage-height;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+  }
 
-    &__option {
-      background: none;
-      border: $border-width-thin solid transparent;
-      border-radius: $border-radius-sm;
-      padding: $spacing-xs;
-      cursor: pointer;
-      width: $size-character-icon;
+  .start__stage-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-      &[aria-pressed="true"] {
-        border-color: $color-btn-primary;
-      }
-    }
+  .start__stage-character {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 70%;
+    width: auto;
   }
 
   .name-input {
@@ -362,6 +367,36 @@ button {
 
     &::placeholder {
       color: $color-text-dark;
+    }
+  }
+
+  // Kønssymbol-knapperne der styrer hvilken karakter-GIF der vises i stage'n
+  .gender-picker {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-md;
+
+    &__option {
+      width: $size-gender-icon;
+      height: $size-gender-icon;
+      border: $border-width-thick solid transparent;
+      border-radius: $border-radius-sm;
+      cursor: pointer;
+      font-family: $font-pixel;
+      font-size: $font-size-lg;
+      color: $color-text-light;
+
+      &--female {
+        background: $color-gender-female;
+      }
+
+      &--male {
+        background: $color-gender-male;
+      }
+
+      &[aria-pressed="true"] {
+        border-color: $color-text-dark;
+      }
     }
   }
 

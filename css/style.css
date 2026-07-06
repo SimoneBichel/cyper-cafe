@@ -150,29 +150,31 @@ button {
   letter-spacing: 2px;
   color: #1a1a1a;
 }
-.screen--start .start__label {
-  font-size: 1rem;
-  color: #1a1a1a;
-  margin-bottom: 0.5rem;
-}
 .screen--start .start__character-select, .screen--start .start__name-input {
   width: 100%;
 }
-.screen--start .character-picker {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-.screen--start .character-picker__option {
-  background: none;
-  border: 2px solid transparent;
+.screen--start .start__stage {
+  position: relative;
+  width: 100%;
+  height: 260px;
   border-radius: 4px;
-  padding: 0.25rem;
-  cursor: pointer;
-  width: 60px;
+  overflow: hidden;
 }
-.screen--start .character-picker__option[aria-pressed=true] {
-  border-color: #f29719;
+.screen--start .start__stage-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.screen--start .start__stage-character {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 70%;
+  width: auto;
 }
 .screen--start .name-input {
   width: 100%;
@@ -190,6 +192,30 @@ button {
 }
 .screen--start .name-input::placeholder {
   color: #1a1a1a;
+}
+.screen--start .gender-picker {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.screen--start .gender-picker__option {
+  width: 56px;
+  height: 56px;
+  border: 3px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Micro 5", monospace;
+  font-size: 1.5rem;
+  color: #f5f5f5;
+}
+.screen--start .gender-picker__option--female {
+  background: #d98fae;
+}
+.screen--start .gender-picker__option--male {
+  background: #4a7fa6;
+}
+.screen--start .gender-picker__option[aria-pressed=true] {
+  border-color: #1a1a1a;
 }
 @media (min-width: 768px) {
   .screen--start .start__title {

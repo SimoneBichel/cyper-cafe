@@ -22,21 +22,43 @@
         <h1 class="start__title">CYBER CAFÉ</h1>
       </div>
 
-      <div class="start__character-select">
-        <p class="start__label">Vælg karakter</p>
-        <div class="character-picker">
-          <button type="button" class="character-picker__option" data-character="1" aria-pressed="true">
-            <img src="assets/characters/character-1.gif" alt="Karakter 1">
-          </button>
-          <button type="button" class="character-picker__option" data-character="2" aria-pressed="false">
-            <img src="assets/characters/character-2.png" alt="Karakter 2">
-          </button>
-        </div>
+      <!-- Baggrund + karakter-GIF lagt oven på hinanden -->
+      <div class="start__stage">
+        <img src="assets/cutscene/scene-cafe-exterior.png" alt="" class="start__stage-bg" aria-hidden="true">
+        <img
+          src="assets/characters/character-1.gif"
+          alt="Din valgte karakter"
+          class="start__stage-character"
+          id="start-character-image"
+        >
       </div>
 
       <div class="start__name-input">
         <label for="player-name" class="visually-hidden">Indtast dit navn</label>
         <input type="text" id="player-name" name="player-name" class="name-input" placeholder="Dit navn" maxlength="20">
+      </div>
+
+      <!-- Vælg karakter ud fra kønssymbol i stedet for en visning af selve karakteren -->
+      <div class="start__character-select">
+        <p class="visually-hidden">Vælg karakter</p>
+        <div class="gender-picker" role="group" aria-label="Vælg karakter">
+          <button
+            type="button"
+            class="gender-picker__option gender-picker__option--female"
+            data-character="1"
+            data-gif="assets/characters/character-1.gif"
+            aria-pressed="true"
+            aria-label="Vælg karakter 1"
+          >♀</button>
+          <button
+            type="button"
+            class="gender-picker__option gender-picker__option--male"
+            data-character="2"
+            data-gif="assets/characters/character-2.png"
+            aria-pressed="false"
+            aria-label="Vælg karakter 2"
+          >♂</button>
+        </div>
       </div>
 
       <button type="button" id="start-button" class="btn btn--primary btn--start">START</button>

@@ -125,7 +125,7 @@ $breakpoint-desktop: 1024px;
 // Genbrugelig knap-grundstil
 @mixin button-base {
   font-family: $font-body;
-  border: none;
+  border: $border-width-thick solid $color-text-dark;
   border-radius: $border-radius-sm;
   cursor: pointer;
   transition: transform $transition-fast, background-color $transition-base;
@@ -151,6 +151,19 @@ $breakpoint-desktop: 1024px;
   height: $size-dot;
   border-radius: 50%;
   flex-shrink: 0;
+}
+
+@mixin pixel-outline-text {
+  color: $color-text-light;
+  text-shadow:
+    -2px -2px 0 $color-text-dark,
+     2px -2px 0 $color-text-dark,
+    -2px  2px 0 $color-text-dark,
+     2px  2px 0 $color-text-dark,
+    -2px  0   0 $color-text-dark,
+     2px  0   0 $color-text-dark,
+     0   -2px 0 $color-text-dark,
+     0    2px 0 $color-text-dark;
 }
 
 
@@ -245,7 +258,7 @@ button {
   &--primary {
     background: $color-btn-primary;
     color: $color-text-dark;
-    font-size: $font-size-md;
+    font-size: $font-size-body;
     padding: $spacing-sm $spacing-md;
 
     &:hover {
@@ -264,7 +277,7 @@ button {
   &--start {
     width: 100%;
     padding: $spacing-md;
-    font-size: $font-size-body;
+    font-size: $font-size-lg;
   }
 
   &--skip {
@@ -276,12 +289,12 @@ button {
     flex: 1;
     background: $color-btn-primary;
     color: $color-text-dark;
-    font-size: $font-size-xs;
+    font-size: $font-size-sm;
     padding: $spacing-sm;
     text-align: center;
 
     @include respond(tablet) {
-      font-size: $font-size-sm;
+      font-size: $font-size-md;
       padding: $spacing-md;
     }
 
@@ -318,7 +331,7 @@ button {
       font-family: $font-pixel;
       font-size: $font-size-lg;
       letter-spacing: $letter-spacing-md;
-      color: $color-text-dark;
+      @include pixel-outline-text;
     }
 
     &__character-select,
@@ -358,10 +371,11 @@ button {
     font-family: $font-pixel;
     font-size: $font-size-md;
     padding: $spacing-sm;
-    border: $border-width-thick solid $color-btn-primary;
+    border: solid $color-btn-primary;
     border-radius: $border-radius-sm;
     text-align: center;
     background: $color-frame-bg;
+
     color: $color-text-dark;
 
     &::placeholder {
@@ -378,7 +392,7 @@ button {
     &__option {
       width: $size-gender-icon;
       height: $size-gender-icon;
-      border: $border-width-thick solid transparent;
+      border: solid transparent;
       border-radius: $border-radius-sm;
       cursor: pointer;
       font-family: $font-pixel;
@@ -394,7 +408,7 @@ button {
       }
 
       &[aria-pressed="true"] {
-        border-color: $color-text-dark;
+        box-shadow: 0 0 0 3px $color-accent-cyan;
       }
     }
   }
@@ -464,13 +478,13 @@ button {
 
   &__titlebar {
     background: $color-titlebar-bg;
-    color: $color-text-light;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: $spacing-xs $spacing-sm;
     font-family: $font-pixel;
     font-size: $font-size-xs;
+    @include pixel-outline-text;
   }
 
   &__controls {

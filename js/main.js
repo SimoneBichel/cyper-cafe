@@ -133,7 +133,8 @@ let bootHasStarted = false;  // forhindrer at boot-sekvensen bliver startet mere
 
 const nameInput = document.getElementById("player-name");
 const startButton = document.getElementById("start-button");
-const characterButtons = document.querySelectorAll(".character-picker__option");
+const characterButtons = document.querySelectorAll(".gender-picker__option");
+const startCharacterImage = document.getElementById("start-character-image");
 
 const introSlides = document.querySelectorAll(".intro-slide");
 const skipIntroButton = document.getElementById("skip-intro-button");
@@ -164,7 +165,8 @@ function showScreen(screenId) {
   });
 }
 
-// Markerer den valgte karakter som "trykket" og gemmer valget
+// Markerer den valgte karakter som "trykket", gemmer valget,
+// og skifter den viste GIF i "stage'n" til den valgte karakter
 function selectCharacter(button) {
   characterButtons.forEach((btn) => {
     btn.setAttribute("aria-pressed", "false");
@@ -172,6 +174,7 @@ function selectCharacter(button) {
 
   button.setAttribute("aria-pressed", "true");
   selectedCharacter = button.dataset.character;
+  startCharacterImage.src = button.dataset.gif;
 }
 
 // Starter spillet: gemmer navn og går videre til introfilmen

@@ -95,9 +95,10 @@ $font-size-sm:   0.65rem;   // scene-prompt, eyebrow, cyber score
 $font-size-md:   0.75rem;   // primær-knapper, navnefelt
 $font-size-body: 1rem;      // almindelig brødtekst (mobil)
 $font-size-body-lg: 1.125rem; // almindelig brødtekst (tablet/computer)
-$font-size-lg:   1.5rem;    // overskrifter
-$font-size-xl:   2rem;      // stor overskrift (tablet)
-$font-size-xxl:  2.5rem;    // stor overskrift (computer)
+
+$font-size-lg:   3rem;    // overskrifter
+$font-size-xl:   3.5rem;      // stor overskrift (tablet)
+$font-size-xxl:  4rem;    // stor overskrift (computer)
 
 // --- Layout: enhedens bredde vokser mobile-first med skærmstørrelsen ---
 $computer-window-width:          380px;  // mobil (udgangspunkt)

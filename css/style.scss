@@ -1,0 +1,693 @@
+// ============================================================
+// STYLE.SCSS — Cyber Café
+//
+// INDHOLD:
+//   1. Variabler   (farver, spacing, størrelser, typografi m.m.)
+//   2. Mixins
+//   3. Reset / base
+//   4. Screen-logik
+//   5. Knapper
+//   6. Startskærm
+//   7. Introfilm
+//   8. Computer-window (delt chrome)
+//   9. Boot screen
+//   10. Computer UI / scener
+//   11. Resultatskærm
+//
+// Alle farver, mål og størrelser er samlet som variabler i punkt 1,
+// så hele designet kan justeres ét sted.
+// ============================================================
+
+
+// ============================================================
+// 1. VARIABLER
+// ============================================================
+
+// --- Farver: baggrunde ---
+$color-page-bg:       #1a1a1a;   // baggrund bag hele "enheden"
+$color-frame-bg:      #c9a876;   // enhedens tan/khaki ramme
+$color-screen-bg:     #2c3a4d;   // den mørke skærm inde i enheden
+$color-titlebar-bg:   #45566e;   // titlebar i computer-vinduet
+
+// --- Farver: tekst ---
+$color-text-dark:     #1a1a1a;
+$color-text-light:    #f5f5f5;
+$color-accent-cyan:   #8fd3f4;   // overskrifter på den mørke skærm
+
+// --- Farver: status (feedback, cyber score, resultat) ---
+$color-success:       #3fa34d;
+$color-warning:       #e0a800;
+$color-danger:        #d9483d;
+
+// --- Farver: knapper ---
+$color-btn-primary:       #eb9b3a;
+$color-btn-primary-hover: #d6862a;
+
+// --- Spacing ---
+$spacing-xs:  0.25rem;
+$spacing-sm:  0.5rem;
+$spacing-md:  1rem;
+$spacing-lg:  1.5rem;
+$spacing-xl:  2.5rem;
+
+// --- Størrelser ---
+$size-dot:              10px;    // farvet status-prik
+$size-character-icon:   60px;    // karaktervalg-ikoner på startskærm
+$size-screen-min-height:          320px;  // min-højde på computer-window__body (mobil)
+$size-screen-min-height-desktop:  420px;  // min-højde på computer-window__body (computer)
+
+// --- Kanter, radius og skygge ---
+$border-radius-xs: 2px;   // window-dots
+$border-radius-sm: 4px;   // knapper, kort, vinduer
+$border-width-thin:   2px;
+$border-width-thick:  3px;
+$shadow-window: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+// --- Transitions ---
+$transition-fast: 0.1s ease;
+$transition-base: 0.15s ease;
+$transition-slow: 0.3s ease;
+
+// --- Opacity ---
+$opacity-dim:    0.6;    // "made by Simone", dæmpet tekst
+$opacity-faint:  0.15;   // progress bar-baggrund
+$opacity-border: 0.2;    // delelinje under cyber score
+
+// --- Fokus / outline (tilgængelighed) ---
+$outline-width:  3px;
+$outline-offset: 2px;
+
+// --- Letter-spacing ---
+$letter-spacing-sm: 1px;
+$letter-spacing-md: 2px;
+
+// --- Typografi: fonte ---
+$font-pixel: "Press Start 2P", monospace;  // retro pixel-font til overskrifter/knapper
+$font-body:  "VT323", monospace;           // font til brødtekst
+
+// --- Typografi: skalaen bruges konsekvent i hele filen ---
+$font-size-xxs:  0.45rem;   // POWER-tag, progress-label
+$font-size-xs:   0.55rem;   // valgknapper, titlebar
+$font-size-sm:   0.65rem;   // scene-prompt, eyebrow, cyber score
+$font-size-md:   0.75rem;   // primær-knapper, navnefelt
+$font-size-body: 1rem;      // almindelig brødtekst (mobil)
+$font-size-body-lg: 1.125rem; // almindelig brødtekst (tablet/computer)
+$font-size-lg:   1.5rem;    // overskrifter
+$font-size-xl:   2rem;      // stor overskrift (tablet)
+$font-size-xxl:  2.5rem;    // stor overskrift (computer)
+
+// --- Layout: enhedens bredde vokser mobile-first med skærmstørrelsen ---
+$computer-window-width:          380px;  // mobil (udgangspunkt)
+$computer-window-width-tablet:   480px;
+$computer-window-width-desktop:  600px;
+
+// --- Breakpoints ---
+$breakpoint-tablet:  768px;
+$breakpoint-desktop: 1024px;
+
+
+// ============================================================
+// 2. MIXINS
+// ============================================================
+
+// Media-query helper — bruges fx: @include respond(tablet) { ... }
+@mixin respond($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: $breakpoint-tablet) { @content; }
+  } @else if $breakpoint == desktop {
+    @media (min-width: $breakpoint-desktop) { @content; }
+  }
+}
+
+// Genbrugelig knap-grundstil
+@mixin button-base {
+  font-family: $font-pixel;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: transform $transition-fast, background-color $transition-base;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: $outline-width solid $color-text-light;
+    outline-offset: $outline-offset;
+  }
+}
+
+// Farvet prik-indikator (feedback-box og resultat-breakdown)
+@mixin status-dot {
+  display: inline-block;
+  width: $size-dot;
+  height: $size-dot;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+
+// ============================================================
+// 3. RESET / BASE
+// ============================================================
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-body;
+  background: $color-page-bg;
+  color: $color-text-light;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: $spacing-md;
+
+  // På større skærme er der plads til at centrere lodret og give luft omkring
+  @include respond(tablet) {
+    align-items: center;
+    padding: $spacing-xl;
+  }
+}
+
+#app {
+  width: 100%;
+  max-width: $computer-window-width;
+  position: relative;
+
+  @include respond(tablet) {
+    max-width: $computer-window-width-tablet;
+  }
+
+  @include respond(desktop) {
+    max-width: $computer-window-width-desktop;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+
+// ============================================================
+// 4. SCREEN — styrer hvilken skærm der vises
+// ============================================================
+
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-lg $spacing-md;
+
+  @include respond(tablet) {
+    padding: $spacing-xl $spacing-lg;
+  }
+
+  &.is-active {
+    display: flex;
+  }
+}
+
+
+// ============================================================
+// 5. KNAPPER
+// ============================================================
+
+.btn {
+  @include button-base;
+
+  &--primary {
+    background: $color-btn-primary;
+    color: $color-text-dark;
+    font-size: $font-size-md;
+    padding: $spacing-sm $spacing-md;
+
+    &:hover {
+      background: $color-btn-primary-hover;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-text-light;
+    text-decoration: underline;
+    font-family: $font-body;
+    font-size: $font-size-body;
+  }
+
+  &--start {
+    width: 100%;
+    padding: $spacing-md;
+    font-size: $font-size-body;
+  }
+
+  &--skip {
+    margin-top: $spacing-md;
+  }
+
+  // Kompakte "VALG 1/2/3"-knapper i en række
+  &--choice {
+    flex: 1;
+    background: $color-btn-primary;
+    color: $color-text-dark;
+    font-size: $font-size-xs;
+    padding: $spacing-sm;
+    text-align: center;
+
+    @include respond(tablet) {
+      font-size: $font-size-sm;
+      padding: $spacing-md;
+    }
+
+    &:hover {
+      background: $color-btn-primary-hover;
+    }
+
+    // Selve valgteksten (fx "Gratis Wifi") vises i scene__text i stedet
+    &__text {
+      display: none;
+    }
+  }
+
+  &--next {
+    width: 100%;
+    margin-top: $spacing-md;
+    padding: $spacing-sm $spacing-md;
+  }
+}
+
+
+// ============================================================
+// 6. STARTSKÆRM
+// ============================================================
+
+.screen--start {
+  background: $color-frame-bg;
+  gap: $spacing-lg;
+  text-align: center;
+  border-radius: $border-radius-sm;
+
+  .start {
+    &__title {
+      font-family: $font-pixel;
+      font-size: $font-size-lg;
+      letter-spacing: $letter-spacing-md;
+      color: $color-text-dark;
+    }
+
+    &__label {
+      font-size: $font-size-body;
+      color: $color-text-dark;
+      margin-bottom: $spacing-sm;
+    }
+
+    &__character-select,
+    &__name-input {
+      width: 100%;
+    }
+  }
+
+  .character-picker {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-md;
+
+    &__option {
+      background: none;
+      border: $border-width-thin solid transparent;
+      border-radius: $border-radius-sm;
+      padding: $spacing-xs;
+      cursor: pointer;
+      width: $size-character-icon;
+
+      &[aria-pressed="true"] {
+        border-color: $color-btn-primary;
+      }
+    }
+  }
+
+  .name-input {
+    width: 100%;
+    font-family: $font-pixel;
+    font-size: $font-size-md;
+    padding: $spacing-sm;
+    border: $border-width-thick solid $color-btn-primary;
+    border-radius: $border-radius-sm;
+    text-align: center;
+    background: $color-frame-bg;
+    color: $color-text-dark;
+
+    &::placeholder {
+      color: $color-text-dark;
+    }
+  }
+
+  @include respond(tablet) {
+    .start__title {
+      font-size: $font-size-xl;
+    }
+  }
+
+  @include respond(desktop) {
+    .start__title {
+      font-size: $font-size-xxl;
+    }
+  }
+}
+
+
+// ============================================================
+// 7. INTROFILM (cutscene)
+// ============================================================
+
+.screen--intro {
+  gap: $spacing-md;
+
+  .intro {
+    &__eyebrow {
+      font-family: $font-pixel;
+      font-size: $font-size-sm;
+      letter-spacing: $letter-spacing-sm;
+      text-transform: uppercase;
+    }
+
+    &__slides {
+      width: 100%;
+      position: relative;
+    }
+  }
+
+  .intro-slide {
+    display: none;
+    width: 100%;
+
+    &.is-active {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+      border-radius: $border-radius-sm;
+    }
+  }
+}
+
+
+// ============================================================
+// 8. COMPUTER-WINDOW — delt "chrome" (boot + computer scener)
+// ============================================================
+
+.computer-window {
+  background: $color-frame-bg;
+  border-radius: $border-radius-sm;
+  box-shadow: $shadow-window;
+  overflow: hidden;
+  width: 100%;
+  color: $color-text-light;
+
+  &__titlebar {
+    background: $color-titlebar-bg;
+    color: $color-text-light;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-xs $spacing-sm;
+    font-family: $font-pixel;
+    font-size: $font-size-xs;
+  }
+
+  &__controls {
+    display: flex;
+    gap: $spacing-xs;
+  }
+
+  &__body {
+    background: $color-screen-bg;
+    padding: $spacing-md;
+    min-height: $size-screen-min-height;
+
+    @include respond(desktop) {
+      padding: $spacing-lg;
+      min-height: $size-screen-min-height-desktop;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: $spacing-sm;
+    background: $color-frame-bg;
+  }
+
+  &__power {
+    font-family: $font-pixel;
+    font-size: $font-size-xxs;
+    background: $color-danger;
+    color: $color-text-light;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+  }
+}
+
+.window-dot {
+  width: $size-dot;
+  height: $size-dot;
+  border-radius: $border-radius-xs;
+  background: $color-text-light;
+  display: inline-block;
+
+  &--close {
+    background: $color-danger;
+  }
+}
+
+.made-by {
+  margin-top: $spacing-sm;
+  font-size: $font-size-md;
+  color: $color-text-dark;
+  opacity: $opacity-dim;
+}
+
+
+// ============================================================
+// 9. BOOT SCREEN indhold
+// ============================================================
+
+.boot {
+  font-family: $font-pixel;
+  font-size: $font-size-xs;
+  color: $color-text-light;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  &__progress {
+    background: rgba($color-text-light, $opacity-faint);
+    border-radius: $border-radius-sm;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+    margin: $spacing-sm 0;
+
+    &-bar {
+      background: $color-btn-primary;
+      height: 100%;
+      width: 0%;
+      transition: width $transition-slow;
+    }
+
+    &-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-xxs;
+    }
+  }
+
+  &__welcome {
+    margin-top: $spacing-md;
+    color: $color-accent-cyan;
+  }
+}
+
+
+// ============================================================
+// 10. COMPUTER UI — SCENERNE (Wi-Fi, adgangskode, phishing)
+// ============================================================
+
+.cyber-score {
+  display: flex;
+  justify-content: space-between;
+  font-family: $font-pixel;
+  font-size: $font-size-sm;
+  color: $color-accent-cyan;
+  border-bottom: $border-width-thin solid rgba($color-text-light, $opacity-border);
+  padding-bottom: $spacing-sm;
+  margin-bottom: $spacing-md;
+
+  &__value {
+    font-weight: bold;
+    color: $color-text-light;
+  }
+
+  &__scene {
+    color: $color-text-light;
+  }
+}
+
+.scene {
+  display: none;
+
+  &.is-active {
+    display: block;
+  }
+
+  &__prompt {
+    font-family: $font-pixel;
+    font-size: $font-size-sm;
+    color: $color-accent-cyan;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__text {
+    font-size: $font-size-body;
+    line-height: 1.4;
+    margin-bottom: $spacing-md;
+
+    @include respond(tablet) {
+      font-size: $font-size-body-lg;
+    }
+  }
+
+  &__options {
+    list-style: none;
+    display: flex;
+    gap: $spacing-sm;
+  }
+}
+
+.feedback-box {
+  background: $color-text-light;
+  color: $color-text-dark;
+  border-radius: $border-radius-sm;
+  padding: $spacing-sm $spacing-md;
+  margin: $spacing-md 0;
+  font-size: $font-size-body;
+
+  &__title {
+    font-family: $font-pixel;
+    font-size: $font-size-xxs;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__indicator {
+    @include status-dot;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__points {
+    font-weight: bold;
+    margin-top: $spacing-xs;
+  }
+
+  // Modifier-klasser sættes af JS ud fra valgets konsekvens
+  &.is-positive .feedback-box__indicator {
+    background: $color-success;
+  }
+
+  &.is-neutral .feedback-box__indicator {
+    background: $color-warning;
+  }
+
+  &.is-negative .feedback-box__indicator {
+    background: $color-danger;
+  }
+}
+
+
+// ============================================================
+// 11. RESULTAT-SKÆRM
+// ============================================================
+
+.scene--result {
+  text-align: center;
+
+  .scene__title {
+    font-family: $font-pixel;
+    font-size: $font-size-md;
+    color: $color-accent-cyan;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.result {
+  &__heading {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-md;
+  }
+
+  &__summary {
+    text-align: left;
+    margin-bottom: $spacing-md;
+
+    &-title {
+      font-family: $font-pixel;
+      font-size: $font-size-sm;
+      color: $color-accent-cyan;
+      margin-bottom: $spacing-sm;
+    }
+  }
+
+  &__breakdown {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+
+      &::before {
+        content: "";
+        @include status-dot;
+        background: $color-success; // JS kan override pr. linje ved behov
+      }
+    }
+  }
+
+  &__message {
+    font-size: $font-size-body;
+    line-height: 1.4;
+    margin-bottom: $spacing-lg;
+
+    @include respond(tablet) {
+      font-size: $font-size-body-lg;
+    }
+  }
+}

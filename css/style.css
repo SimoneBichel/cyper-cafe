@@ -450,7 +450,7 @@ button {
   height: 10px;
   border-radius: 50%;
   flex-shrink: 0;
-  background: #3fa34d;
+  background: var(--dot-color, #3fa34d);
 }
 .result__message {
   font-size: 1rem;

@@ -676,7 +676,7 @@ button {
       &::before {
         content: "";
         @include status-dot;
-        background: $color-success; // JS kan override pr. linje ved behov
+        background: var(--dot-color, #{$color-success}); // JS sætter --dot-color pr. linje
       }
     }
   }

@@ -56,7 +56,6 @@ $spacing-xl:  2.5rem;
 $size-dot:              10px;    // farvet status-prik
 $size-character-icon:   60px;    // karaktervalg-ikoner på startskærm
 $size-gender-icon:      56px;    // kønssymbol-knapperne
-$size-stage-height:     260px;   // højden på baggrund+karakter-visningen
 $size-screen-min-height:          320px;  // min-højde på computer-window__body (mobil)
 $size-screen-min-height-desktop:  420px;  // min-højde på computer-window__body (computer)
 
@@ -332,7 +331,7 @@ button {
   .start__stage {
     position: relative;
     width: 100%;
-    height: $size-stage-height;
+    aspect-ratio: 3 / 2; // matcher baggrundsbilledets 192 × 128 px
     border-radius: $border-radius-sm;
     overflow: hidden;
   }

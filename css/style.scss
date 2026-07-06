@@ -276,7 +276,7 @@ button {
   }
 
   &--start {
-    width: 100%;
+    width: 85%;
     padding: $spacing-md;
     font-size: $font-size-lg;
   }
@@ -368,9 +368,10 @@ button {
   }
 
   .name-input {
-    width: 100%;
+    width: 70%;
+    margin:0 auto;
     font-family: $font-pixel;
-    font-size: $font-size-body;
+    font-size: $font-size-lg;
     padding: $spacing-sm;
     border: $border-width-thick solid $color-text-dark;
     border-radius: $border-radius-sm;

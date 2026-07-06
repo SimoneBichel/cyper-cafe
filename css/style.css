@@ -106,7 +106,7 @@ button {
   font-size: 1rem;
 }
 .btn--start {
-  width: 100%;
+  width: 85%;
   padding: 1rem;
   font-size: 1.5rem;
 }
@@ -179,9 +179,10 @@ button {
   width: auto;
 }
 .screen--start .name-input {
-  width: 100%;
+  width: 70%;
+  margin: 0 auto;
   font-family: "Micro 5", monospace;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 0.5rem;
   border: 3px solid #1a1a1a;
   border-radius: 4px;

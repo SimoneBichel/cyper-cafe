@@ -107,8 +107,9 @@ button {
 }
 .btn--start {
   width: 85%;
+  margin: 0 auto;
   padding: 1rem;
-  font-size: 3rem;
+  font-size: 1.5rem;
 }
 .btn--skip {
   margin-top: 1rem;
@@ -182,7 +183,7 @@ button {
   width: 70%;
   margin: 0 auto;
   font-family: "Micro 5", monospace;
-  font-size: 3rem;
+  font-size: 1.5rem;
   padding: 0.5rem;
   border: 3px solid #1a1a1a;
   border-radius: 4px;
@@ -208,7 +209,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-family: "Micro 5", monospace;
-  font-size: 3rem;
+  font-size: 1.5rem;
   color: #f5f5f5;
 }
 .screen--start .gender-picker__option--female {
@@ -450,7 +451,7 @@ button {
 }
 
 .result__heading {
-  font-size: 3rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 .result__summary {

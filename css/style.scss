@@ -92,13 +92,13 @@ $font-body:  "Monomaniac One", sans-serif; // font til brødtekst og "made by Si
 $font-size-xxs:  0.45rem;   // POWER-tag, progress-label
 $font-size-xs:   0.55rem;   // valgknapper, titlebar
 $font-size-sm:   0.65rem;   // scene-prompt, eyebrow, cyber score
-$font-size-md:   0.75rem;   // primær-knapper, navnefelt
+$font-size-md:   0.75rem;   // primær-knapper
 $font-size-body: 1rem;      // almindelig brødtekst (mobil)
 $font-size-body-lg: 1.125rem; // almindelig brødtekst (tablet/computer)
-
-$font-size-lg:   3rem;    // overskrifter
-$font-size-xl:   3.5rem;      // stor overskrift (tablet)
-$font-size-xxl:  4rem;    // stor overskrift (computer)
+$font-size-lg:   1.5rem;    // navnefelt, START-knap, gender-ikoner, resultat-overskrift
+$font-size-title: 3rem;     // CYBER CAFÉ-titlen på mobil
+$font-size-xl:   3.5rem;    // CYBER CAFÉ-titlen på tablet
+$font-size-xxl:  4rem;      // CYBER CAFÉ-titlen på computer
 
 // --- Layout: enhedens bredde vokser mobile-first med skærmstørrelsen ---
 $computer-window-width:          380px;  // mobil (udgangspunkt)
@@ -154,6 +154,7 @@ $breakpoint-desktop: 1024px;
   flex-shrink: 0;
 }
 
+// Blokagtig "hvid tekst med sort omrids"-stil til CYBER CAFE-overskrifter
 @mixin pixel-outline-text {
   color: $color-text-light;
   text-shadow:
@@ -269,15 +270,17 @@ button {
 
   &--ghost {
     background: transparent;
-    border:none;
+    border: none;
     color: $color-text-light;
     text-decoration: underline;
     font-family: $font-body;
     font-size: $font-size-body;
   }
 
+  // Smallere end hele bredden og centreret, så den ikke går ud til kanten
   &--start {
     width: 85%;
+    margin: 0 auto;
     padding: $spacing-md;
     font-size: $font-size-lg;
   }
@@ -331,7 +334,7 @@ button {
   .start {
     &__title {
       font-family: $font-pixel;
-      font-size: $font-size-lg;
+      font-size: $font-size-title;
       letter-spacing: $letter-spacing-md;
       @include pixel-outline-text;
     }
@@ -368,9 +371,10 @@ button {
     width: auto;
   }
 
+  // Smallere end hele bredden og centreret, så den matcher START-knappen
   .name-input {
     width: 70%;
-    margin:0 auto;
+    margin: 0 auto;
     font-family: $font-pixel;
     font-size: $font-size-lg;
     padding: $spacing-sm;
@@ -378,7 +382,6 @@ button {
     border-radius: $border-radius-sm;
     text-align: center;
     background: $color-btn-primary;
-
     color: $color-text-dark;
 
     &::placeholder {

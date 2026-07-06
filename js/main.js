@@ -123,6 +123,8 @@ let selectedCharacter = "1";
 let currentSceneNumber = 1;
 let cyberScore = 0;
 let breakdown = []; // { label, points, status } — ét pr. besvaret scene
+let introTimeoutId = null;   // reference til den ventende intro-timer, så den kan annulleres
+let bootHasStarted = false;  // forhindrer at boot-sekvensen bliver startet mere end én gang
 
 
 // ------------------------------------------------------------
@@ -190,19 +192,32 @@ function playIntro(slideIndex) {
   const isLastSlide = slideIndex >= introSlides.length - 1;
 
   if (isLastSlide) {
-    setTimeout(runBootSequence, 1800);
+    introTimeoutId = setTimeout(runBootSequence, 1800);
   } else {
-    setTimeout(() => playIntro(slideIndex + 1), 1800);
+    introTimeoutId = setTimeout(() => playIntro(slideIndex + 1), 1800);
   }
 }
 
-// Springer introfilmen over og går direkte til boot-sekvensen
+// Springer introfilmen over: annullerer den ventende intro-timer først,
+// så boot-sekvensen ikke også bliver startet automatisk senere
 function skipIntro() {
+  if (introTimeoutId !== null) {
+    clearTimeout(introTimeoutId);
+    introTimeoutId = null;
+  }
+
   runBootSequence();
 }
 
 // Kører boot-skærmens loading-animation og går derefter videre til computeren
 function runBootSequence() {
+  // Ekstra sikkerhed: hvis funktionen på en eller anden måde bliver kaldt
+  // to gange, ignoreres det andet kald, så loading-baren ikke kører to gange
+  if (bootHasStarted) {
+    return;
+  }
+  bootHasStarted = true;
+
   showScreen("screen-boot");
   bootPlayerName.textContent = playerName;
 
@@ -361,8 +376,14 @@ function restartGame() {
   cyberScore = 0;
   breakdown = [];
   currentSceneNumber = 1;
-  nameInput.value = "";
+  bootHasStarted = false;
 
+  if (introTimeoutId !== null) {
+    clearTimeout(introTimeoutId);
+    introTimeoutId = null;
+  }
+
+  nameInput.value = "";
   bootProgressBar.style.width = "0%";
   bootProgressLabel.textContent = "0%";
 

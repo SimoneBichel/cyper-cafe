@@ -268,6 +268,7 @@ button {
 
   &--ghost {
     background: transparent;
+    border:none;
     color: $color-text-light;
     text-decoration: underline;
     font-family: $font-body;
@@ -369,12 +370,12 @@ button {
   .name-input {
     width: 100%;
     font-family: $font-pixel;
-    font-size: $font-size-md;
+    font-size: $font-size-body;
     padding: $spacing-sm;
-    border: solid $color-btn-primary;
+    border: $border-width-thick solid $color-text-dark;
     border-radius: $border-radius-sm;
     text-align: center;
-    background: $color-frame-bg;
+    background: $color-btn-primary;
 
     color: $color-text-dark;
 
@@ -392,7 +393,7 @@ button {
     &__option {
       width: $size-gender-icon;
       height: $size-gender-icon;
-      border: solid transparent;
+      border: $border-width-thick solid $color-text-dark;
       border-radius: $border-radius-sm;
       cursor: pointer;
       font-family: $font-pixel;

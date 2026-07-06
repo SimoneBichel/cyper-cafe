@@ -24,7 +24,7 @@
 // ============================================================
 
 // --- Farver: baggrunde ---
-$color-page-bg:       #9d8d74;   // baggrund bag hele "enheden"
+$color-page-bg:       #1a1a1a;   // baggrund bag hele "enheden"
 $color-frame-bg:      #c9a876;   // enhedens tan/khaki ramme
 $color-screen-bg:     #2c3a4d;   // den mørke skærm inde i enheden
 $color-titlebar-bg:   #45566e;   // titlebar i computer-vinduet
@@ -82,8 +82,8 @@ $letter-spacing-sm: 1px;
 $letter-spacing-md: 2px;
 
 // --- Typografi: fonte ---
-$font-pixel: "Press Start 2P", monospace;  // retro pixel-font til overskrifter/knapper
-$font-body:  "VT323", monospace;           // font til brødtekst
+$font-pixel: "Micro 5", monospace;         // pixel-font til titel, overskrifter og knapper
+$font-body:  "Monomaniac One", sans-serif; // font til brødtekst og "made by Simone"
 
 // --- Typografi: skalaen bruges konsekvent i hele filen ---
 $font-size-xxs:  0.45rem;   // POWER-tag, progress-label
@@ -121,7 +121,7 @@ $breakpoint-desktop: 1024px;
 
 // Genbrugelig knap-grundstil
 @mixin button-base {
-  font-family: $font-pixel;
+  font-family: $font-body;
   border: none;
   border-radius: $border-radius-sm;
   cursor: pointer;

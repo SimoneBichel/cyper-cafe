@@ -24,7 +24,8 @@
 // ============================================================
 
 // --- Farver: baggrunde ---
-$color-page-bg:       #9d8d74;   // baggrund bag hele "enheden"
+$color-page-bg:       #9d8d74;   // baggrund bag startskærmen
+$color-computer-bg:   #7d97a1;   // baggrund bag boot-/computer-skærmene (blågrå)
 $color-frame-bg:      #c9a876;   // enhedens tan/khaki ramme
 $color-screen-bg:     #2c3a4d;   // den mørke skærm inde i enheden
 $color-titlebar-bg:   #45566e;   // titlebar i computer-vinduet
@@ -62,6 +63,7 @@ $size-screen-min-height-desktop:  420px;  // min-højde på computer-window__bod
 // --- Kanter, radius og skygge ---
 $border-radius-xs: 2px;   // window-dots
 $border-radius-sm: 4px;   // knapper, kort, vinduer
+$border-radius-pill: 999px; // piller-formede knapper i computer-vinduet
 $border-width-thin:   2px;
 $border-width-thick:  3px;
 $shadow-window: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -247,6 +249,12 @@ button {
   &.is-active {
     display: flex;
   }
+}
+
+// Boot- og computer-skærmene har en blågrå baggrund om selve "enheden"
+.screen--boot,
+.screen--computer {
+  background: $color-computer-bg;
 }
 
 
@@ -475,6 +483,7 @@ button {
 
 .computer-window {
   background: $color-frame-bg;
+  border: $border-width-thick solid $color-text-light;
   border-radius: $border-radius-sm;
   box-shadow: $shadow-window;
   overflow: hidden;
@@ -489,6 +498,7 @@ button {
     padding: $spacing-xs $spacing-sm;
     font-family: $font-pixel;
     font-size: $font-size-xs;
+    border-bottom: $border-width-thin solid $color-text-light;
     @include pixel-outline-text;
   }
 
@@ -518,10 +528,7 @@ button {
   &__power {
     font-family: $font-pixel;
     font-size: $font-size-xxs;
-    background: $color-danger;
-    color: $color-text-light;
-    padding: $spacing-xs $spacing-sm;
-    border-radius: $border-radius-sm;
+    color: $color-text-dark;
   }
 }
 
@@ -599,7 +606,7 @@ button {
   font-family: $font-pixel;
   font-size: $font-size-sm;
   color: $color-accent-cyan;
-  border-bottom: $border-width-thin solid rgba($color-text-light, $opacity-border);
+  border-bottom: $border-width-thin solid $color-text-light;
   padding-bottom: $spacing-sm;
   margin-bottom: $spacing-md;
 
@@ -641,7 +648,16 @@ button {
     list-style: none;
     display: flex;
     gap: $spacing-sm;
+    padding-top: $spacing-md;
+    border-top: $border-width-thin solid $color-text-light;
   }
+}
+
+// Knapper inde i computer-vinduet (VALG, NÆSTE, SPIL IGEN) er hvidkantede
+// og pille-formede, i modsætning til START-knappen på startskærmen
+.computer-window__body .btn {
+  border-color: $color-text-light;
+  border-radius: $border-radius-pill;
 }
 
 .feedback-box {

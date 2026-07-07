@@ -71,6 +71,11 @@ button {
   display: flex;
 }
 
+.screen--boot,
+.screen--computer {
+  background: #7d97a1;
+}
+
 .btn {
   font-family: "Monomaniac One", sans-serif;
   border: 3px solid #1a1a1a;
@@ -261,6 +266,7 @@ button {
 
 .computer-window {
   background: #c9a876;
+  border: 3px solid #f5f5f5;
   border-radius: 4px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   overflow: hidden;
@@ -275,6 +281,7 @@ button {
   padding: 0.25rem 0.5rem;
   font-family: "Micro 5", monospace;
   font-size: 0.55rem;
+  border-bottom: 2px solid #f5f5f5;
   color: #f5f5f5;
   text-shadow: -2px -2px 0 #1a1a1a, 2px -2px 0 #1a1a1a, -2px 2px 0 #1a1a1a, 2px 2px 0 #1a1a1a, -2px 0 0 #1a1a1a, 2px 0 0 #1a1a1a, 0 -2px 0 #1a1a1a, 0 2px 0 #1a1a1a;
 }
@@ -302,10 +309,7 @@ button {
 .computer-window__power {
   font-family: "Micro 5", monospace;
   font-size: 0.45rem;
-  background: #d9483d;
-  color: #f5f5f5;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  color: #1a1a1a;
 }
 
 .window-dot {
@@ -367,7 +371,7 @@ button {
   font-family: "Micro 5", monospace;
   font-size: 0.65rem;
   color: #8fd3f4;
-  border-bottom: 2px solid rgba(245, 245, 245, 0.2);
+  border-bottom: 2px solid #f5f5f5;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
 }
@@ -405,6 +409,13 @@ button {
   list-style: none;
   display: flex;
   gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid #f5f5f5;
+}
+
+.computer-window__body .btn {
+  border-color: #f5f5f5;
+  border-radius: 999px;
 }
 
 .feedback-box {

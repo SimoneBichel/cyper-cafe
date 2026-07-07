@@ -181,19 +181,22 @@ $breakpoint-desktop: 1024px;
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+  overflow: hidden; // hele spillet skal altid kunne ses uden at scrolle
+}
+
 body {
   font-family: $font-body;
   background: $color-page-bg;
   color: $color-text-light;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: $spacing-md;
 
   // På større skærme er der plads til at centrere lodret og give luft omkring
   @include respond(tablet) {
-    align-items: center;
     padding: $spacing-xl;
   }
 }
@@ -202,6 +205,7 @@ body {
   width: 100%;
   max-width: $computer-window-width;
   position: relative;
+  transform-origin: center center; // JS skalerer herfra, så #app altid passer i vinduet
 
   @include respond(tablet) {
     max-width: $computer-window-width-tablet;

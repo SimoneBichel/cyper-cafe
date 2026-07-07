@@ -163,6 +163,30 @@ function showScreen(screenId) {
     screen.classList.toggle("is-active", isTarget);
     screen.setAttribute("aria-hidden", String(!isTarget));
   });
+
+  // Indholdets højde ændrer sig fra skærm til skærm, så vi genberegner skaleringen
+  fitToScreen();
+}
+
+// Skalerer #app ned (aldrig op), så hele spillet altid er synligt i vinduet,
+// uanset skærmstørrelse — uden at der nogensinde skal scrolles.
+function fitToScreen() {
+  const app = document.getElementById("app");
+
+  // Nulstil skalering først, så vi kan måle appens naturlige (uskalerede) størrelse
+  app.style.transform = "scale(1)";
+
+  const appRect = app.getBoundingClientRect();
+  const availableWidth = window.innerWidth;
+  const availableHeight = window.innerHeight;
+
+  const scaleX = availableWidth / appRect.width;
+  const scaleY = availableHeight / appRect.height;
+
+  // Vi skalerer aldrig op over 1 — kun ned, hvis indholdet er for stort til vinduet
+  const scale = Math.min(scaleX, scaleY, 1);
+
+  app.style.transform = "scale(" + scale + ")";
 }
 
 // Markerer den valgte karakter som "trykket", gemmer valget,
@@ -430,9 +454,17 @@ document.querySelectorAll('.scene[data-scene]').forEach((sceneElement) => {
 
 restartButton.addEventListener("click", restartGame);
 
+// Genberegn skaleringen, hver gang vinduet ændrer størrelse (fx ved rotation af mobil,
+// eller når man ændrer bredden af browservinduet på computer)
+window.addEventListener("resize", fitToScreen);
+
 
 // ------------------------------------------------------------
 // 6. OPSTART
 // ------------------------------------------------------------
 
 showScreen("screen-start");
+
+// Skrifttyperne (Google Fonts) indlæses asynkront og kan ændre tekstens højde,
+// når de er klar — genberegn derfor skaleringen én gang til, når siden er helt loadet
+window.addEventListener("load", fitToScreen);

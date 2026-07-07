@@ -81,7 +81,7 @@ button {
 
 .screen--boot,
 .screen--computer {
-  background: #9d8d74;
+  background: #c9a876;
 }
 
 .btn {
@@ -269,6 +269,7 @@ button {
 .computer-window {
   background: #c9a876;
   border: 3px solid #f5f5f5;
+  outline: 0.25rem solid #7d97a1;
   border-radius: 4px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   overflow: hidden;
@@ -302,13 +303,12 @@ button {
     min-height: 420px;
   }
 }
-.computer-window__footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem;
-  background: #c9a876;
-}
+
 .computer-window__power {
+  display: block;
+  width: 100%;
+  text-align: right;
+  margin-top: 0.5rem;
   font-family: "Micro 5", monospace;
   font-size: 0.45rem;
   color: #1a1a1a;

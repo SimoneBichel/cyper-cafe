@@ -25,8 +25,9 @@
 
 // --- Farver: baggrunde ---
 $color-page-bg:       #9d8d74;   // baggrund bag startskærmen
-$color-computer-bg:   #9d8d74;   // baggrund bag boot-/computer-skærmene (blågrå)
+$color-computer-bg:   #c9a876;   // baggrund bag boot-/computer-skærmene (tan/khaki)
 $color-frame-bg:      #c9a876;   // enhedens tan/khaki ramme
+$color-window-border: #7d97a1;   // blå kant om selve computer-vinduet
 $color-screen-bg:     #2c3a4d;   // den mørke skærm inde i enheden
 $color-titlebar-bg:   #45566e;   // titlebar i computer-vinduet
 
@@ -484,6 +485,7 @@ button {
 .computer-window {
   background: $color-frame-bg;
   border: $border-width-thick solid $color-text-light;
+  outline: $spacing-xs solid $color-window-border; // den blå kant udenom
   border-radius: $border-radius-sm;
   box-shadow: $shadow-window;
   overflow: hidden;
@@ -518,18 +520,17 @@ button {
     }
   }
 
-  &__footer {
-    display: flex;
-    justify-content: flex-end;
-    padding: $spacing-sm;
-    background: $color-frame-bg;
-  }
+}
 
-  &__power {
-    font-family: $font-pixel;
-    font-size: $font-size-xxs;
-    color: $color-text-dark;
-  }
+// POWER-teksten ligger nu udenfor vinduet, nederst til højre på skærmens egen baggrund
+.computer-window__power {
+  display: block;
+  width: 100%;
+  text-align: right;
+  margin-top: $spacing-sm;
+  font-family: $font-pixel;
+  font-size: $font-size-xxs;
+  color: $color-text-dark;
 }
 
 .window-dot {

@@ -204,6 +204,7 @@ body {
 #app {
   width: 100%;
   max-width: $computer-window-width;
+  aspect-ratio: 9 / 16;
   position: relative;
   transform-origin: center center; // JS skalerer herfra, så #app altid passer i vinduet
 
@@ -244,6 +245,9 @@ button {
   display: none;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;                       
+  height: 100%; 
   padding: $spacing-lg $spacing-md;
 
   @include respond(tablet) {
@@ -549,7 +553,8 @@ button {
 }
 
 .made-by {
-  margin-top: $spacing-sm;
+  margin-top: auto;
+  padding-top: 0.5rem;
   font-size: $font-size-md;
   color: $color-text-dark;
   opacity: $opacity-dim;

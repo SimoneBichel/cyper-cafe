@@ -170,15 +170,20 @@ function showScreen(screenId) {
 
 // Skalerer #app ned (aldrig op), så hele spillet altid er synligt i vinduet,
 // uanset skærmstørrelse — uden at der nogensinde skal scrolles.
+// Tager højde for body's padding, så der altid er luft omkring "kortet".
 function fitToScreen() {
   const app = document.getElementById("app");
 
   // Nulstil skalering først, så vi kan måle appens naturlige (uskalerede) størrelse
   app.style.transform = "scale(1)";
 
+  const bodyStyles = getComputedStyle(document.body);
+  const paddingX = parseFloat(bodyStyles.paddingLeft) + parseFloat(bodyStyles.paddingRight);
+  const paddingY = parseFloat(bodyStyles.paddingTop) + parseFloat(bodyStyles.paddingBottom);
+
   const appRect = app.getBoundingClientRect();
-  const availableWidth = window.innerWidth;
-  const availableHeight = window.innerHeight;
+  const availableWidth = window.innerWidth - paddingX;
+  const availableHeight = window.innerHeight - paddingY;
 
   const scaleX = availableWidth / appRect.width;
   const scaleY = availableHeight / appRect.height;

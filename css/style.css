@@ -27,6 +27,7 @@ body {
 #app {
   width: 100%;
   max-width: 380px;
+  aspect-ratio: 9/16;
   position: relative;
   transform-origin: center center;
 }
@@ -64,6 +65,9 @@ button {
   display: none;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   padding: 1.5rem 1rem;
 }
 @media (min-width: 768px) {
@@ -328,7 +332,8 @@ button {
 }
 
 .made-by {
-  margin-top: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
   font-size: 0.75rem;
   color: #1a1a1a;
   opacity: 0.6;

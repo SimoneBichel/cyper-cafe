@@ -131,15 +131,7 @@ $breakpoint-desktop: 1024px;
   border: $border-width-thick solid $color-text-dark;
   border-radius: $border-radius-sm;
   cursor: pointer;
-  transition: transform $transition-fast, background-color $transition-base;
-
-  &:hover {
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
+  transition: background-color $transition-base;
 
   &:focus-visible {
     outline: $outline-width solid $color-text-light;
@@ -204,7 +196,7 @@ body {
 #app {
   width: 100%;
   max-width: $computer-window-width;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 9 / 16; // fast "kort-højde", ens for alle skærme
   position: relative;
   transform-origin: center center; // JS skalerer herfra, så #app altid passer i vinduet
 
@@ -246,8 +238,8 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;                       
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   padding: $spacing-lg $spacing-md;
 
   @include respond(tablet) {
@@ -553,8 +545,8 @@ button {
 }
 
 .made-by {
-  margin-top: auto;
-  padding-top: 0.5rem;
+  margin-top: auto; // skubber teksten helt ned til bunden af skærmen
+  padding-top: $spacing-sm;
   font-size: $font-size-md;
   color: $color-text-dark;
   opacity: $opacity-dim;

@@ -332,13 +332,6 @@ button {
   border-radius: $border-radius-sm;
 
   .start {
-    &__title {
-      font-family: $font-pixel;
-      font-size: $font-size-title;
-      letter-spacing: $letter-spacing-md;
-      @include pixel-outline-text;
-    }
-
     &__character-select,
     &__name-input {
       width: 100%;
@@ -418,17 +411,23 @@ button {
       }
     }
   }
+}
+
+// Delt sidetitel — bruges på ALLE skærme (start, boot, computer),
+// så "CYBER CAFÉ" ser ens ud overalt.
+.page-title {
+  font-family: $font-pixel;
+  font-size: $font-size-title;
+  letter-spacing: $letter-spacing-md;
+  margin-bottom: $spacing-md;
+  @include pixel-outline-text;
 
   @include respond(tablet) {
-    .start__title {
-      font-size: $font-size-xl;
-    }
+    font-size: $font-size-xl;
   }
 
   @include respond(desktop) {
-    .start__title {
-      font-size: $font-size-xxl;
-    }
+    font-size: $font-size-xxl;
   }
 }
 

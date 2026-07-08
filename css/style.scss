@@ -197,7 +197,7 @@ body {
 #app {
   width: 100%;
   max-width: $computer-window-width;
-  aspect-ratio: 9 / 16; // fast "kort-højde", ens for alle skærme
+  aspect-ratio: 9 / 16;
   position: relative;
   transform-origin: center center; // JS skalerer herfra, så #app altid passer i vinduet
 

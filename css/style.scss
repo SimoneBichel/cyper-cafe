@@ -105,8 +105,8 @@ $font-size-xxl:  4rem;      // CYBER CAFÉ-titlen på computer
 
 // --- Layout: enhedens bredde vokser mobile-first med skærmstørrelsen ---
 $computer-window-width:          380px;  // mobil (udgangspunkt)
-$computer-window-width-tablet:   480px;
-$computer-window-width-desktop:  600px;
+$computer-window-width-tablet:   640px;
+$computer-window-width-desktop:  820px;
 
 // --- Breakpoints ---
 $breakpoint-tablet:  768px;
@@ -203,10 +203,12 @@ body {
 
   @include respond(tablet) {
     max-width: $computer-window-width-tablet;
+    aspect-ratio: 3 / 4;
   }
 
   @include respond(desktop) {
     max-width: $computer-window-width-desktop;
+    aspect-ratio: 4 / 3;
   }
 }
 

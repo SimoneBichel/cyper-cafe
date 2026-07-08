@@ -92,10 +92,9 @@ $font-pixel: "Micro 5", monospace;         // pixel-font til titel, overskrifter
 $font-body:  "Monomaniac One", sans-serif; // font til brødtekst og "made by Simone"
 
 // --- Typografi: skalaen bruges konsekvent i hele filen ---
-$font-size-xxs:  0.45rem;   // POWER-tag, progress-label
-$font-size-xs:   0.55rem;   // valgknapper, titlebar
-$font-size-sm:   0.65rem;   // scene-prompt, eyebrow, cyber score
-$font-size-md:   0.75rem;   // primær-knapper
+$font-size-xs:   0.55rem;   // POWER-tag, progress-label, valgknapper, titlebar
+$font-size-sm:   0.65rem;   // VALG-knapper (mobil), eyebrow, resultat-summary-titel
+$font-size-md:   0.75rem;   // primær-knapper, made-by, cyber score, scene-prompt, VALG-knapper (tablet), resultat-titel
 $font-size-body: 1rem;      // almindelig brødtekst (mobil)
 $font-size-body-lg: 1.125rem; // almindelig brødtekst (tablet/computer)
 $font-size-lg:   1.5rem;    // navnefelt, START-knap, gender-ikoner, resultat-overskrift
@@ -197,18 +196,18 @@ body {
 #app {
   width: 100%;
   max-width: $computer-window-width;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 9 / 16; // fast "kort-højde" på mobil
   position: relative;
   transform-origin: center center; // JS skalerer herfra, så #app altid passer i vinduet
 
   @include respond(tablet) {
     max-width: $computer-window-width-tablet;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 3 / 4; // mindre "smal" facon, så bredden får lov at gøre noget
   }
 
   @include respond(desktop) {
     max-width: $computer-window-width-desktop;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4 / 3; // bredere end høj på computer
   }
 }
 
@@ -537,7 +536,7 @@ button {
   bottom: 0;
   right: $spacing-sm;
   font-family: $font-pixel;
-  font-size: $font-size-xxs;
+  font-size: $font-size-xs;
   color: $color-text-dark;
 }
 
@@ -595,7 +594,7 @@ button {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: $font-size-xxs;
+      font-size: $font-size-xs;
     }
   }
 
@@ -614,11 +613,19 @@ button {
   display: flex;
   justify-content: space-between;
   font-family: $font-pixel;
-  font-size: $font-size-sm;
+  font-size: $font-size-md;
   color: $color-accent-cyan;
   border-bottom: $border-width-thin solid $color-text-light;
   padding-bottom: $spacing-sm;
   margin-bottom: $spacing-md;
+
+  @include respond(tablet) {
+    font-size: $font-size-lg;
+  }
+
+  @include respond(desktop) {
+    font-size: 1.75rem; // endnu et trin op, ligesom .page-title har mobil/tablet/computer
+  }
 
   &__value {
     font-weight: bold;
@@ -639,9 +646,17 @@ button {
 
   &__prompt {
     font-family: $font-pixel;
-    font-size: $font-size-sm;
+    font-size: $font-size-md;
     color: $color-accent-cyan;
     margin-bottom: $spacing-sm;
+
+    @include respond(tablet) {
+      font-size: $font-size-lg;
+    }
+
+    @include respond(desktop) {
+      font-size: 1.75rem;
+    }
   }
 
   &__text {
@@ -680,7 +695,7 @@ button {
 
   &__title {
     font-family: $font-pixel;
-    font-size: $font-size-xxs;
+    font-size: $font-size-xs;
     margin-bottom: $spacing-xs;
   }
 

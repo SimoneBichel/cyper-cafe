@@ -230,6 +230,13 @@ button {
   white-space: nowrap;
 }
 
+// Bruges i stedet for [hidden]-attributten på feedback-box/næste-knap,
+// så deres plads bliver ved med at optage plads i layoutet — det forhindrer
+// at computer-vinduet skifter størrelse, når feedbacken dukker op.
+.is-hidden {
+  visibility: hidden;
+}
+
 
 // ============================================================
 // 4. SCREEN — styrer hvilken skærm der vises
@@ -692,6 +699,11 @@ button {
   padding: $spacing-sm $spacing-md;
   margin: $spacing-md 0;
   font-size: $font-size-body;
+  min-height: 8rem; // reserverer plads til den længste feedback-tekst, så boksen ikke vokser
+
+  @include respond(tablet) {
+    min-height: 9rem;
+  }
 
   &__title {
     font-family: $font-pixel;

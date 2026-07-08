@@ -310,9 +310,9 @@ function loadScene(sceneNumber) {
   const nextButton = sceneElement.querySelector(".btn--next");
   const optionButtons = sceneElement.querySelectorAll(".btn--choice");
 
-  feedbackBox.hidden = true;
+  feedbackBox.classList.add("is-hidden");
   feedbackBox.classList.remove("is-positive", "is-neutral", "is-negative");
-  nextButton.hidden = true;
+  nextButton.classList.add("is-hidden");
 
   optionButtons.forEach((button) => {
     button.disabled = false;
@@ -344,13 +344,13 @@ function showFeedback(sceneElement, choice) {
   const feedbackPoints = feedbackBox.querySelector(".feedback-box__points");
   const nextButton = sceneElement.querySelector(".btn--next");
 
-  feedbackBox.hidden = false;
+  feedbackBox.classList.remove("is-hidden");
   feedbackBox.classList.add("is-" + choice.status);
 
   feedbackText.textContent = choice.text;
   feedbackPoints.textContent = (choice.points > 0 ? "+" : "") + choice.points + " point";
 
-  nextButton.hidden = false;
+  nextButton.classList.remove("is-hidden");
 }
 
 // Forhindrer at spilleren vælger flere gange i samme scene

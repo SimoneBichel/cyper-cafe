@@ -63,6 +63,10 @@ button {
   white-space: nowrap;
 }
 
+.is-hidden {
+  visibility: hidden;
+}
+
 .screen {
   display: none;
   flex-direction: column;
@@ -454,6 +458,12 @@ button {
   padding: 0.5rem 1rem;
   margin: 1rem 0;
   font-size: 1rem;
+  min-height: 8rem;
+}
+@media (min-width: 768px) {
+  .feedback-box {
+    min-height: 9rem;
+  }
 }
 .feedback-box__title {
   font-family: "Micro 5", monospace;

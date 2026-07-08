@@ -304,11 +304,15 @@ button {
   }
 }
 
-.computer-window__power {
-  display: block;
+.computer-window-frame {
+  position: relative;
   width: 100%;
-  text-align: right;
-  margin-top: 0.5rem;
+}
+
+.computer-window__power {
+  position: absolute;
+  bottom: 0;
+  right: 0.5rem;
   font-family: "Micro 5", monospace;
   font-size: 0.45rem;
   color: #1a1a1a;

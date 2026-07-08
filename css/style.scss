@@ -522,12 +522,18 @@ button {
 
 }
 
-// POWER-teksten ligger nu udenfor vinduet, nederst til højre på skærmens egen baggrund
-.computer-window__power {
-  display: block;
+// Wrapper udenom vinduet — giver et positioneringspunkt, så POWER kan
+// placeres præcist i hjørnet, ovenpå selve rammen
+.computer-window-frame {
+  position: relative;
   width: 100%;
-  text-align: right;
-  margin-top: $spacing-sm;
+}
+
+// POWER sidder ovenpå rammens nederste højre hjørne, ligesom på skærmbilledet
+.computer-window__power {
+  position: absolute;
+  bottom: 0;
+  right: $spacing-sm;
   font-family: $font-pixel;
   font-size: $font-size-xxs;
   color: $color-text-dark;

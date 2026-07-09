@@ -301,12 +301,18 @@ button {
 .computer-window__body {
   background: #2c3a4d;
   padding: 1rem;
-  min-height: 320px;
+  height: 34rem;
+  overflow-y: auto;
+}
+@media (min-width: 768px) {
+  .computer-window__body {
+    height: 36rem;
+  }
 }
 @media (min-width: 1024px) {
   .computer-window__body {
     padding: 1.5rem;
-    min-height: 420px;
+    height: 38rem;
   }
 }
 

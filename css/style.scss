@@ -58,8 +58,9 @@ $spacing-xl:  2.5rem;
 $size-dot:              10px;    // farvet status-prik
 $size-character-icon:   60px;    // karaktervalg-ikoner på startskærm
 $size-gender-icon:      56px;    // kønssymbol-knapperne
-$size-screen-min-height:          320px;  // min-højde på computer-window__body (mobil)
-$size-screen-min-height-desktop:  420px;  // min-højde på computer-window__body (computer)
+$size-screen-fixed-height:          34rem;  // fast højde på computer-window__body (mobil) — rummer den længste scene
+$size-screen-fixed-height-tablet:   36rem;  // fast højde (tablet)
+$size-screen-fixed-height-desktop:  38rem;  // fast højde (computer)
 
 // --- Kanter, radius og skygge ---
 $border-radius-xs: 2px;   // window-dots
@@ -520,11 +521,16 @@ button {
   &__body {
     background: $color-screen-bg;
     padding: $spacing-md;
-    min-height: $size-screen-min-height;
+    height: $size-screen-fixed-height; // fast højde — ens for boot og alle scener
+    overflow-y: auto; // sikkerhedsnet, hvis noget alligevel skulle blive for højt
+
+    @include respond(tablet) {
+      height: $size-screen-fixed-height-tablet;
+    }
 
     @include respond(desktop) {
       padding: $spacing-lg;
-      min-height: $size-screen-min-height-desktop;
+      height: $size-screen-fixed-height-desktop;
     }
   }
 

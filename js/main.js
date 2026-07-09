@@ -164,6 +164,8 @@ function showScreen(screenId) {
     screen.setAttribute("aria-hidden", String(!isTarget));
   });
 
+  document.getElementById("app").classList.toggle("app--start", screenId === "screen-start");
+
   // Indholdets højde ændrer sig fra skærm til skærm, så vi genberegner skaleringen
   fitToScreen();
 }

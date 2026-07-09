@@ -27,19 +27,30 @@ body {
 #app {
   width: 100%;
   max-width: 380px;
-  aspect-ratio: 9/16;
   position: relative;
   transform-origin: center center;
 }
 @media (min-width: 768px) {
   #app {
     max-width: 640px;
-    aspect-ratio: 3/4;
   }
 }
 @media (min-width: 1024px) {
   #app {
-    max-width: 820px;
+    max-width: 1100px;
+  }
+}
+#app.app--start {
+  aspect-ratio: 9/16;
+}
+@media (min-width: 768px) {
+  #app.app--start {
+    aspect-ratio: 3/4;
+  }
+}
+@media (min-width: 1024px) {
+  #app.app--start {
+    aspect-ratio: 7/8;
   }
 }
 
@@ -312,7 +323,7 @@ button {
 @media (min-width: 1024px) {
   .computer-window__body {
     padding: 1.5rem;
-    height: 38rem;
+    height: 44rem;
   }
 }
 
@@ -401,7 +412,7 @@ button {
 }
 @media (min-width: 1024px) {
   .cyber-score {
-    font-size: 1.75rem;
+    font-size: 2.1rem;
   }
 }
 .cyber-score__value {
@@ -431,7 +442,7 @@ button {
 }
 @media (min-width: 1024px) {
   .scene__prompt {
-    font-size: 1.75rem;
+    font-size: 2.1rem;
   }
 }
 .scene__text {
@@ -442,6 +453,11 @@ button {
 @media (min-width: 768px) {
   .scene__text {
     font-size: 1.125rem;
+  }
+}
+@media (min-width: 1024px) {
+  .scene__text {
+    font-size: 1.6rem;
   }
 }
 .scene__options {
@@ -469,6 +485,13 @@ button {
 @media (min-width: 768px) {
   .feedback-box {
     min-height: 9rem;
+    font-size: 1.125rem;
+  }
+}
+@media (min-width: 1024px) {
+  .feedback-box {
+    font-size: 1.6rem;
+    min-height: 12rem;
   }
 }
 .feedback-box__title {
@@ -550,5 +573,10 @@ button {
 @media (min-width: 768px) {
   .result__message {
     font-size: 1.125rem;
+  }
+}
+@media (min-width: 1024px) {
+  .result__message {
+    font-size: 1.6rem;
   }
 }/*# sourceMappingURL=style.css.map */

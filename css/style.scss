@@ -60,7 +60,7 @@ $size-character-icon:   60px;    // karaktervalg-ikoner på startskærm
 $size-gender-icon:      56px;    // kønssymbol-knapperne
 $size-screen-fixed-height:          34rem;  // fast højde på computer-window__body (mobil) — rummer den længste scene
 $size-screen-fixed-height-tablet:   36rem;  // fast højde (tablet)
-$size-screen-fixed-height-desktop:  38rem;  // fast højde (computer)
+$size-screen-fixed-height-desktop:  44rem;  // fast højde (computer)
 
 // --- Kanter, radius og skygge ---
 $border-radius-xs: 2px;   // window-dots
@@ -106,7 +106,7 @@ $font-size-xxl:  4rem;      // CYBER CAFÉ-titlen på computer
 // --- Layout: enhedens bredde vokser mobile-first med skærmstørrelsen ---
 $computer-window-width:          380px;  // mobil (udgangspunkt)
 $computer-window-width-tablet:   640px;
-$computer-window-width-desktop:  820px;
+$computer-window-width-desktop:  1100px;
 
 // --- Breakpoints ---
 $breakpoint-tablet:  768px;
@@ -197,24 +197,33 @@ body {
 #app {
   width: 100%;
   max-width: $computer-window-width;
-  aspect-ratio: 9 / 16; // fast "kort-højde" på mobil
   position: relative;
   transform-origin: center center; // JS skalerer herfra, så #app altid passer i vinduet
 
   @include respond(tablet) {
     max-width: $computer-window-width-tablet;
-    aspect-ratio: 3 / 4; // mindre "smal" facon, så bredden får lov at gøre noget
   }
 
   @include respond(desktop) {
     max-width: $computer-window-width-desktop;
   }
 
+  // Kun startskærmen har brug for et fast højde-forhold (så baggrundsbilledet på 3:2
+  // kan beholde sit rigtige forhold uden at blive klemt). Boot-/computer-skærmen får i
+  // stedet lov at få sin højde fra det faktiske indhold — det sikrer, at titlen og
+  // "made by Simone" ALDRIG kan ende udenfor den tan-farvede baggrund, uanset hvor
+  // meget plads teksten/vinduet fylder.
   &.app--start {
-  @include respond(desktop) {
-    aspect-ratio: 7 / 8;   // ← højere format, kun til startskærmen
+    aspect-ratio: 9 / 16;
+
+    @include respond(tablet) {
+      aspect-ratio: 3 / 4;
+    }
+
+    @include respond(desktop) {
+      aspect-ratio: 7 / 8;
+    }
   }
-  
 }
 
 img {
@@ -365,7 +374,7 @@ button {
   .start__stage {
     position: relative;
     width: 100%;
-    flex-shrink: 0;
+    flex-shrink: 0; // forhindrer at billedet klemmes sammen, hvis der er trangt om pladsen
     aspect-ratio: 3 / 2; // matcher baggrundsbilledets 192 × 128 px
     border-radius: $border-radius-sm;
     overflow: hidden;
@@ -643,7 +652,7 @@ button {
   }
 
   @include respond(desktop) {
-    font-size: 1.75rem; // endnu et trin op, ligesom .page-title har mobil/tablet/computer
+    font-size: 2.1rem; // endnu et trin op, ligesom .page-title har mobil/tablet/computer
   }
 
   &__value {
@@ -674,7 +683,7 @@ button {
     }
 
     @include respond(desktop) {
-      font-size: 1.75rem;
+      font-size: 2.1rem;
     }
   }
 
@@ -685,6 +694,10 @@ button {
 
     @include respond(tablet) {
       font-size: $font-size-body-lg;
+    }
+
+    @include respond(desktop) {
+      font-size: 1.6rem;
     }
   }
 
@@ -715,6 +728,12 @@ button {
 
   @include respond(tablet) {
     min-height: 9rem;
+    font-size: $font-size-body-lg;
+  }
+
+  @include respond(desktop) {
+    font-size: 1.6rem;
+    min-height: 12rem;
   }
 
   &__title {
@@ -807,6 +826,10 @@ button {
 
     @include respond(tablet) {
       font-size: $font-size-body-lg;
+    }
+
+    @include respond(desktop) {
+      font-size: 1.6rem;
     }
   }
 }

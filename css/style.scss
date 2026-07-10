@@ -56,6 +56,7 @@ $spacing-xl:  2.5rem;
 
 // --- Størrelser ---
 $size-dot:              10px;    // farvet status-prik
+$size-window-control:   18px;    // titlebar-knapperne (minimer/luk)
 $size-character-icon:   60px;    // karaktervalg-ikoner på startskærm
 $size-gender-icon:      56px;    // kønssymbol-knapperne
 $size-screen-fixed-height:          34rem;  // fast højde på computer-window__body (mobil) — rummer den længste scene
@@ -569,14 +570,34 @@ button {
 }
 
 .window-dot {
-  width: $size-dot;
-  height: $size-dot;
+  width: $size-window-control;
+  height: $size-window-control;
   border-radius: $border-radius-xs;
   background: $color-text-light;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &--minimize::after {
+    content: "";
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    bottom: 22%;
+    height: 2px;
+    background: $color-text-dark;
+  }
 
   &--close {
     background: $color-danger;
+
+    &::before {
+      content: "\2715";
+      color: $color-text-light;
+      font-size: $size-window-control * 0.6;
+      line-height: 1;
+    }
   }
 }
 

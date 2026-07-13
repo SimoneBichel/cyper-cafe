@@ -150,6 +150,7 @@ const cyberScoreScene = document.getElementById("cyber-score-scene");
 
 const restartButton = document.getElementById("restart-button");
 const bgMusic = document.getElementById("bg-music");
+const startMusic = document.getElementById("start-music");
 
 
 // ------------------------------------------------------------
@@ -198,6 +199,20 @@ function fitToScreen() {
   app.style.transform = "scale(" + scale + ")";
 }
 
+function tryPlayStartMusic() {
+  startMusic.play().catch(() => {
+    // Autoplay blokeret af browseren — handleFirstInteraction() prøver igen
+  });
+}
+
+function handleFirstInteraction() {
+  const startScreen = document.getElementById("screen-start");
+
+  if (startScreen.classList.contains("is-active") && startMusic.paused) {
+    tryPlayStartMusic();
+  }
+}
+
 // Markerer den valgte karakter som "trykket", gemmer valget,
 // og skifter den viste GIF i "stage'n" til den valgte karakter
 function selectCharacter(button) {
@@ -214,6 +229,9 @@ function selectCharacter(button) {
 function startGame() {
   const typedName = nameInput.value.trim();
   playerName = typedName === "" ? "Spiller" : typedName;
+
+  startMusic.pause();
+  startMusic.currentTime = 0;
 
   showScreen("screen-intro");
 
@@ -459,6 +477,7 @@ function restartGame() {
   bootProgressLabel.textContent = "0%";
 
   showScreen("screen-start");
+  tryPlayStartMusic();
 }
 
 // Opdaterer Cyber Score i toppen af computer-skærmen
@@ -498,6 +517,9 @@ document.querySelectorAll('.scene[data-scene]').forEach((sceneElement) => {
 
 restartButton.addEventListener("click", restartGame);
 
+document.addEventListener("click", handleFirstInteraction);
+document.addEventListener("keydown", handleFirstInteraction);
+
 // Genberegn skaleringen, hver gang vinduet ændrer størrelse (fx ved rotation af mobil,
 // eller når man ændrer bredden af browservinduet på computer)
 window.addEventListener("resize", fitToScreen);
@@ -508,6 +530,7 @@ window.addEventListener("resize", fitToScreen);
 // ------------------------------------------------------------
 
 showScreen("screen-start");
+tryPlayStartMusic();
 
 // Skrifttyperne (Google Fonts) indlæses asynkront og kan ændre tekstens højde,
 // når de er klar — genberegn derfor skaleringen én gang til, når siden er helt loadet

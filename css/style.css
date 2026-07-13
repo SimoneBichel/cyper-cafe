@@ -272,16 +272,29 @@ button {
   width: 100%;
   position: relative;
 }
-.screen--intro .intro-slide {
+.screen--intro .intro__slides.is-hidden {
+  display: none;
+}
+
+.intro-slide {
   display: none;
   width: 100%;
 }
-.screen--intro .intro-slide.is-active {
+.intro-slide.is-active {
   display: block;
 }
-.screen--intro .intro-slide img {
+.intro-slide img {
   width: 100%;
   border-radius: 4px;
+}
+
+.intro-video {
+  width: 100%;
+  border-radius: 4px;
+  aspect-ratio: 3/2;
+}
+.intro-video.is-hidden {
+  display: none;
 }
 
 .computer-window {

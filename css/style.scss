@@ -484,8 +484,11 @@ button {
     &__slides {
       width: 100%;
       position: relative;
+
+      &.is-hidden { display: none; }
     }
   }
+} 
 
   .intro-slide {
     display: none;
@@ -500,7 +503,17 @@ button {
       border-radius: $border-radius-sm;
     }
   }
-}
+
+  .intro-video {
+    width: 100%;
+    border-radius: $border-radius-sm;
+    aspect-ratio: 3 / 2;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+
 
 
 // ============================================================

@@ -137,6 +137,7 @@ const characterButtons = document.querySelectorAll(".gender-picker__option");
 const startCharacterImage = document.getElementById("start-character-image");
 
 const introSlides = document.querySelectorAll(".intro-slide");
+const introVideoBoy = document.getElementById("intro-video-boy");
 const skipIntroButton = document.getElementById("skip-intro-button");
 
 const bootPlayerName = document.getElementById("boot-player-name");
@@ -214,11 +215,19 @@ function startGame() {
   playerName = typedName === "" ? "Spiller" : typedName;
 
   showScreen("screen-intro");
-  playIntro(0);
+
+  if (selectedCharacter === "2") {
+    playIntroVideo();
+  } else {
+    playIntro(0);
+  }
 }
 
 // Viser introfilmens slides efter hinanden med en kort pause imellem
 function playIntro(slideIndex) {
+    introVideoBoy.classList.add("is-hidden");
+  document.querySelector(".intro__slides").classList.remove("is-hidden");
+  
   introSlides.forEach((slide, index) => {
     slide.classList.toggle("is-active", index === slideIndex);
   });
@@ -232,6 +241,16 @@ function playIntro(slideIndex) {
   }
 }
 
+function playIntroVideo() {
+  document.querySelector(".intro__slides").classList.add("is-hidden");
+  introVideoBoy.classList.remove("is-hidden");
+
+  introVideoBoy.currentTime = 0;
+  introVideoBoy.play();
+
+  introVideoBoy.addEventListener("ended", runBootSequence, { once: true });
+}
+
 // Springer introfilmen over: annullerer den ventende intro-timer først,
 // så boot-sekvensen ikke også bliver startet automatisk senere
 function skipIntro() {
@@ -239,6 +258,11 @@ function skipIntro() {
     clearTimeout(introTimeoutId);
     introTimeoutId = null;
   }
+
+  if (!introVideoBoy.paused) {
+    introVideoBoy.pause();
+  }
+  introVideoBoy.removeEventListener("ended", runBootSequence);
 
   runBootSequence();
 }
@@ -416,6 +440,10 @@ function restartGame() {
     clearTimeout(introTimeoutId);
     introTimeoutId = null;
   }
+
+  introVideoBoy.pause();
+  introVideoBoy.currentTime = 0;
+  introVideoBoy.removeEventListener("ended", runBootSequence);
 
   nameInput.value = "";
   bootProgressBar.style.width = "0%";

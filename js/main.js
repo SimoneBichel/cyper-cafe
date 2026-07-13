@@ -149,6 +149,7 @@ const cyberScoreValue = document.getElementById("cyber-score-value");
 const cyberScoreScene = document.getElementById("cyber-score-scene");
 
 const restartButton = document.getElementById("restart-button");
+const bgMusic = document.getElementById("bg-music");
 
 
 // ------------------------------------------------------------
@@ -275,6 +276,11 @@ function runBootSequence() {
     return;
   }
   bootHasStarted = true;
+
+  // Baggrundsmusikken starter her — lige efter introfilmen (uanset slideshow,
+  // video eller "Spring over") — og looper resten af spillet
+  bgMusic.currentTime = 0;
+  bgMusic.play();
 
   showScreen("screen-boot");
   bootPlayerName.textContent = playerName;
@@ -435,6 +441,9 @@ function restartGame() {
   breakdown = [];
   currentSceneNumber = 1;
   bootHasStarted = false;
+
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
 
   if (introTimeoutId !== null) {
     clearTimeout(introTimeoutId);

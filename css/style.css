@@ -377,6 +377,18 @@ button {
   justify-content: center;
   position: relative;
 }
+@media (min-width: 768px) {
+  .window-dot {
+    width: 24px;
+    height: 24px;
+  }
+}
+@media (min-width: 1024px) {
+  .window-dot {
+    width: 32px;
+    height: 32px;
+  }
+}
 .window-dot--minimize::after {
   content: "";
   position: absolute;
@@ -392,8 +404,18 @@ button {
 .window-dot--close::before {
   content: "✕";
   color: #f5f5f5;
-  font-size: 10.8px;
+  font-size: 15.3px;
   line-height: 1;
+}
+@media (min-width: 768px) {
+  .window-dot--close::before {
+    font-size: 21.6px;
+  }
+}
+@media (min-width: 1024px) {
+  .window-dot--close::before {
+    font-size: 32.4px;
+  }
 }
 
 .made-by {

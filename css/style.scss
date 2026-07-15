@@ -94,8 +94,8 @@ $font-pixel: "Micro 5", monospace;         // pixel-font til titel, overskrifter
 $font-body:  "Monomaniac One", sans-serif; // font til brødtekst og "made by Simone"
 
 // --- Typografi: skalaen bruges konsekvent i hele filen ---
-$font-size-xs:   0.55rem;   // POWER-tag, progress-label, valgknapper, titlebar
-$font-size-sm:   0.65rem;   // VALG-knapper (mobil), eyebrow, resultat-summary-titel
+
+$font-size-sm:   0.65rem;   // VALG-knapper (mobil), eyebrow, resultat-summary-titel, POWER-tag, progress-label, valgknapper, titlebar
 $font-size-md:   0.75rem;   // primær-knapper, made-by, cyber score, scene-prompt, VALG-knapper (tablet), resultat-titel
 $font-size-body: 1rem;      // almindelig brødtekst (mobil)
 $font-size-body-lg: 1.125rem; // almindelig brødtekst (tablet/computer)
@@ -537,9 +537,19 @@ button {
     align-items: center;
     padding: $spacing-xs $spacing-sm;
     font-family: $font-pixel;
-    font-size: $font-size-xs;
+    font-size: $font-size-lg;
     border-bottom: $border-width-thin solid $color-text-light;
     @include pixel-outline-text;
+
+    @include respond(tablet) {
+    font-size: $font-size-lg;
+    padding: $spacing-sm $spacing-lg;
+  }
+
+  @include respond(desktop) {
+    font-size: $font-size-xl;
+   padding: $spacing-md $spacing-xl;
+   }
   }
 
   &__controls {
@@ -572,13 +582,13 @@ button {
   width: 100%;
 }
 
-// POWER sidder ovenpå rammens nederste højre hjørne, ligesom på skærmbilledet
+// POWER sidder ovenpå rammens nederste højre hjørne
 .computer-window__power {
   position: absolute;
   bottom: 0;
   right: $spacing-sm;
   font-family: $font-pixel;
-  font-size: $font-size-xs;
+  font-size: $font-size-sm;
   color: $color-text-dark;
 }
 
@@ -617,7 +627,7 @@ button {
 .made-by {
   margin-top: auto; // skubber teksten helt ned til bunden af skærmen
   padding-top: $spacing-sm;
-  font-size: $font-size-md;
+  font-size: $font-size-lg;
   color: $color-text-dark;
   opacity: $opacity-dim;
 }
@@ -629,7 +639,7 @@ button {
 
 .boot {
   font-family: $font-pixel;
-  font-size: $font-size-xs;
+  font-size: $font-size-lg;
   color: $color-text-light;
   display: flex;
   flex-direction: column;
@@ -656,7 +666,7 @@ button {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: $font-size-xs;
+      font-size: $font-size-sm;
     }
   }
 
@@ -675,7 +685,7 @@ button {
   display: flex;
   justify-content: space-between;
   font-family: $font-pixel;
-  font-size: $font-size-md;
+  font-size: $font-size-lg;
   color: $color-accent-cyan;
   border-bottom: $border-width-thin solid $color-text-light;
   padding-bottom: $spacing-sm;
@@ -708,7 +718,7 @@ button {
 
   &__prompt {
     font-family: $font-pixel;
-    font-size: $font-size-md;
+    font-size: $font-size-lg;
     color: $color-accent-cyan;
     margin-bottom: $spacing-sm;
 
@@ -766,13 +776,13 @@ button {
   }
 
   @include respond(desktop) {
-    font-size: 1.6rem;
+    font-size: $font-size-body-lg;
     min-height: 12rem;
   }
 
   &__title {
     font-family: $font-pixel;
-    font-size: $font-size-xs;
+    font-size: $font-size-sm;
     margin-bottom: $spacing-xs;
   }
 

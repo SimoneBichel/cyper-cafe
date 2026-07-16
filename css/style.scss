@@ -512,6 +512,7 @@ button {
     width: 100%;
     border-radius: $border-radius-sm;
     aspect-ratio: 3 / 2;
+    image-rendering: pixelated;
 
     &.is-hidden {
       display: none;

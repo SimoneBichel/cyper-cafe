@@ -138,6 +138,7 @@ const startCharacterImage = document.getElementById("start-character-image");
 
 const introSlides = document.querySelectorAll(".intro-slide");
 const introVideoBoy = document.getElementById("intro-video-boy");
+const introVideoGirl = document.getElementById("intro-video-girl");
 const skipIntroButton = document.getElementById("skip-intro-button");
 
 const bootPlayerName = document.getElementById("boot-player-name");
@@ -235,15 +236,14 @@ function startGame() {
 
   showScreen("screen-intro");
 
-  if (selectedCharacter === "2") {
-    playIntroVideo();
-  } else {
-    playIntro(0);
-  }
+      if (selectedCharacter === "2") {playIntroVideo(introVideoBoy);} 
+      else if (selectedCharacter === "1") {playIntroVideo(introVideoGirl);} 
+      else { playIntro(0);}
 }
 
 // Viser introfilmens slides efter hinanden med en kort pause imellem
 function playIntro(slideIndex) {
+    introVideoGirl.classList.add("is-hidden");
     introVideoBoy.classList.add("is-hidden");
   document.querySelector(".intro__slides").classList.remove("is-hidden");
   
@@ -260,14 +260,16 @@ function playIntro(slideIndex) {
   }
 }
 
-function playIntroVideo() {
+function playIntroVideo(video) {
   document.querySelector(".intro__slides").classList.add("is-hidden");
-  introVideoBoy.classList.remove("is-hidden");
+  introVideoBoy.classList.add("is-hidden");
+  introVideoGirl.classList.add("is-hidden");
 
-  introVideoBoy.currentTime = 0;
-  introVideoBoy.play();
+  video.classList.remove("is-hidden");
+  video.currentTime = 0;
+  video.play();
 
-  introVideoBoy.addEventListener("ended", runBootSequence, { once: true });
+  video.addEventListener("ended", runBootSequence, { once: true });
 }
 
 // Springer introfilmen over: annullerer den ventende intro-timer først,
@@ -278,10 +280,12 @@ function skipIntro() {
     introTimeoutId = null;
   }
 
-  if (!introVideoBoy.paused) {
-    introVideoBoy.pause();
-  }
-  introVideoBoy.removeEventListener("ended", runBootSequence);
+  [introVideoBoy, introVideoGirl].forEach((video) => {
+    if (!video.paused) {
+      video.pause();
+    }
+    video.removeEventListener("ended", runBootSequence);
+  });
 
   runBootSequence();
 }
@@ -468,9 +472,11 @@ function restartGame() {
     introTimeoutId = null;
   }
 
-  introVideoBoy.pause();
-  introVideoBoy.currentTime = 0;
-  introVideoBoy.removeEventListener("ended", runBootSequence);
+   [introVideoBoy, introVideoGirl].forEach((video) => {
+    video.pause();
+    video.currentTime = 0;
+    video.removeEventListener("ended", runBootSequence);
+  });
 
   nameInput.value = "";
   bootProgressBar.style.width = "0%";

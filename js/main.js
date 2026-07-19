@@ -153,6 +153,12 @@ const restartButton = document.getElementById("restart-button");
 const bgMusic = document.getElementById("bg-music");
 const startMusic = document.getElementById("start-music");
 
+const feedbackSounds = {
+  positive: document.getElementById("sound-positive"),
+  neutral: document.getElementById("sound-neutral"),
+  negative: document.getElementById("sound-negative"),
+};
+
 
 // ------------------------------------------------------------
 // 4. FUNKTIONER
@@ -406,6 +412,13 @@ function showFeedback(sceneElement, choice) {
 
   nextButton.classList.remove("is-hidden");
 }
+
+  // Afspil den lydeffekt, der matcher valgets farve (grøn/gul/rød)
+  const sound = feedbackSounds[choice.status];
+  sound.currentTime = 0;
+  sound.play().catch(() => {
+    // Ingen handling nødvendig, hvis lyden af en eller anden grund ikke kan afspilles
+  });
 
 // Forhindrer at spilleren vælger flere gange i samme scene
 function disableChoices(sceneElement) {

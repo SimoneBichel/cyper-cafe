@@ -681,6 +681,14 @@ button {
     overflow: hidden;
     margin: $spacing-sm 0;
 
+    @include respond(tablet) {        // ← NY BLOK
+    height: 28px;
+    }
+
+    @include respond(desktop) {       // ← NY BLOK
+    height: 36px;
+    }
+
     &-bar {
       background: $color-btn-primary;
       height: 100%;
@@ -694,7 +702,12 @@ button {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: $font-size-sm;
+      font-size: $font-size-lg;
+
+        @include respond(desktop) {     
+        font-size: 1.8rem;
+        }
+
     }
   }
 

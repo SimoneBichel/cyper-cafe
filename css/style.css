@@ -449,6 +449,16 @@ button {
   overflow: hidden;
   margin: 0.5rem 0;
 }
+@media (min-width: 768px) {
+  .boot__progress {
+    height: 28px;
+  }
+}
+@media (min-width: 1024px) {
+  .boot__progress {
+    height: 36px;
+  }
+}
 .boot__progress-bar {
   background: #f29719;
   height: 100%;
@@ -461,7 +471,12 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.65rem;
+  font-size: 1.5rem;
+}
+@media (min-width: 1024px) {
+  .boot__progress-label {
+    font-size: 1.8rem;
+  }
 }
 .boot__welcome {
   margin-top: 1rem;

@@ -93,16 +93,19 @@ const outcomes = [
     min: 50,
     title: "Cyber Champion",
     message: "Flotte valg! Du navigerede café-wifi, adgangskoder og en phishing-mail sikkert igennem.",
+    sound: "sound-result-champion",
   },
   {
     min: 25,
     title: "Godt gået",
     message: "Du traf flere gode valg, men der er stadig plads til at skærpe dine digitale vaner.",
+    sound: "sound-result-good",
   },
   {
     min: -Infinity,
     title: "Prøv igen",
     message: "Flere af dine valg gjorde dig sårbar. Prøv igen, og se om du kan træffe sikrere valg.",
+    sound: "sound-result-retry",
   },
 ];
 
@@ -480,6 +483,13 @@ function showResult() {
 
   const outcome = outcomes.find((level) => cyberScore >= level.min);
   resultMessage.textContent = outcome.title + " — " + outcome.message;
+
+  // Afspil den lydeffekt, der matcher det opnåede resultat-niveau
+  const resultSound = document.getElementById(outcome.sound);
+  resultSound.currentTime = 0;
+  resultSound.play().catch(() => {
+    // Ingen handling nødvendig, hvis lyden af en eller anden grund ikke kan afspilles
+  });
 
   loadScene("result");
   cyberScoreScene.textContent = "Resultat";

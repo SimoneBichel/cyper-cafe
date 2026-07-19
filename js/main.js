@@ -309,7 +309,7 @@ function runBootSequence() {
 
   let progress = 0;
   const progressStep = 5;
-  const stepDelay = 60;
+  const stepDelay = 200;
 
   const progressInterval = setInterval(() => {
     progress += progressStep;
@@ -317,7 +317,7 @@ function runBootSequence() {
     if (progress >= 100) {
       progress = 100;
       clearInterval(progressInterval);
-      setTimeout(startComputerScenario, 700);
+      setTimeout(startComputerScenario, 1500);
     }
 
     bootProgressBar.style.width = progress + "%";

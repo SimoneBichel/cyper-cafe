@@ -154,7 +154,7 @@ button {
 }
 @media (min-width: 1024px) {
   .btn--choice {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     padding: 1.5rem;
   }
 }
@@ -274,6 +274,11 @@ button {
   letter-spacing: 1px;
   text-transform: uppercase;
 }
+@media (min-width: 1024px) {
+  .screen--intro .intro__eyebrow {
+    font-size: 1.1rem;
+  }
+}
 .screen--intro .intro__slides {
   width: 100%;
   position: relative;
@@ -281,26 +286,23 @@ button {
 .screen--intro .intro__slides.is-hidden {
   display: none;
 }
-
-.intro-slide {
+.screen--intro .intro-slide {
   display: none;
   width: 100%;
 }
-.intro-slide.is-active {
+.screen--intro .intro-slide.is-active {
   display: block;
 }
-.intro-slide img {
+.screen--intro .intro-slide img {
   width: 100%;
   border-radius: 4px;
 }
-
-.intro-video {
+.screen--intro .intro-video {
   width: 100%;
   border-radius: 4px;
   aspect-ratio: 3/2;
-  image-rendering: pixelated;
 }
-.intro-video.is-hidden {
+.screen--intro .intro-video.is-hidden {
   display: none;
 }
 
@@ -321,21 +323,21 @@ button {
   align-items: center;
   padding: 0.25rem 0.5rem;
   font-family: "Micro 5", monospace;
-  font-size: 1.5rem;
+  font-size: 0.65rem;
   border-bottom: 2px solid #f5f5f5;
   color: #f5f5f5;
   text-shadow: -2px -2px 0 #1a1a1a, 2px -2px 0 #1a1a1a, -2px 2px 0 #1a1a1a, 2px 2px 0 #1a1a1a, -2px 0 0 #1a1a1a, 2px 0 0 #1a1a1a, 0 -2px 0 #1a1a1a, 0 2px 0 #1a1a1a;
 }
 @media (min-width: 768px) {
   .computer-window__titlebar {
-    font-size: 1.5rem;
-    padding: 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
   }
 }
 @media (min-width: 1024px) {
   .computer-window__titlebar {
-    font-size: 3.5rem;
-    padding: 1rem 2.5rem;
+    font-size: 1.25rem;
+    padding: 1rem 1.5rem;
   }
 }
 .computer-window__controls {
@@ -373,6 +375,11 @@ button {
   font-size: 0.65rem;
   color: #1a1a1a;
 }
+@media (min-width: 1024px) {
+  .computer-window__power {
+    font-size: 1rem;
+  }
+}
 
 .window-dot {
   width: 18px;
@@ -383,18 +390,6 @@ button {
   align-items: center;
   justify-content: center;
   position: relative;
-}
-@media (min-width: 768px) {
-  .window-dot {
-    width: 24px;
-    height: 24px;
-  }
-}
-@media (min-width: 1024px) {
-  .window-dot {
-    width: 32px;
-    height: 32px;
-  }
 }
 .window-dot--minimize::after {
   content: "";
@@ -414,32 +409,32 @@ button {
   font-size: 15.3px;
   line-height: 1;
 }
-@media (min-width: 768px) {
-  .window-dot--close::before {
-    font-size: 21.6px;
-  }
-}
-@media (min-width: 1024px) {
-  .window-dot--close::before {
-    font-size: 32.4px;
-  }
-}
 
 .made-by {
   margin-top: auto;
   padding-top: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   color: #1a1a1a;
   opacity: 0.6;
+}
+@media (min-width: 1024px) {
+  .made-by {
+    font-size: 1.1rem;
+  }
 }
 
 .boot {
   font-family: "Micro 5", monospace;
-  font-size: 1.5rem;
+  font-size: 0.65rem;
   color: #f5f5f5;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+@media (min-width: 1024px) {
+  .boot {
+    font-size: 1.1rem;
+  }
 }
 .boot__progress {
   background: rgba(245, 245, 245, 0.15);
@@ -471,11 +466,16 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
+}
+@media (min-width: 768px) {
+  .boot__progress-label {
+    font-size: 1.5rem;
+  }
 }
 @media (min-width: 1024px) {
   .boot__progress-label {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 }
 .boot__welcome {
@@ -487,7 +487,7 @@ button {
   display: flex;
   justify-content: space-between;
   font-family: "Micro 5", monospace;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   color: #8fd3f4;
   border-bottom: 2px solid #f5f5f5;
   padding-bottom: 0.5rem;
@@ -519,7 +519,7 @@ button {
 }
 .scene__prompt {
   font-family: "Micro 5", monospace;
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   color: #8fd3f4;
   margin-bottom: 0.5rem;
 }
@@ -555,7 +555,7 @@ button {
   padding-top: 1rem;
   border-top: 2px solid #f5f5f5;
 }
-.scene li {
+.scene__options li {
   flex: 1;
 }
 
@@ -581,7 +581,7 @@ button {
 }
 @media (min-width: 1024px) {
   .feedback-box {
-    font-size: 1.125rem;
+    font-size: 1.6rem;
     min-height: 12rem;
   }
 }
@@ -589,6 +589,11 @@ button {
   font-family: "Micro 5", monospace;
   font-size: 0.65rem;
   margin-bottom: 0.25rem;
+}
+@media (min-width: 1024px) {
+  .feedback-box__title {
+    font-size: 1rem;
+  }
 }
 .feedback-box__indicator {
   display: inline-block;
@@ -617,9 +622,19 @@ button {
 }
 .scene--result .scene__title {
   font-family: "Micro 5", monospace;
-  font-size: 0.75rem;
+  font-size: 1.5rem;
   color: #8fd3f4;
   margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  .scene--result .scene__title {
+    font-size: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .scene--result .scene__title {
+    font-size: 2.5rem;
+  }
 }
 
 .result__heading {
@@ -632,9 +647,19 @@ button {
 }
 .result__summary-title {
   font-family: "Micro 5", monospace;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: #8fd3f4;
   margin-bottom: 0.5rem;
+}
+@media (min-width: 768px) {
+  .result__summary-title {
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .result__summary-title {
+    font-size: 1.75rem;
+  }
 }
 .result__breakdown {
   list-style: none;

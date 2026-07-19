@@ -56,11 +56,7 @@ $spacing-xl:  2.5rem;
 
 // --- Størrelser ---
 $size-dot:              10px;    // farvet status-prik
-
 $size-window-control:   18px;    // titlebar-knapperne (minimer/luk)
-$size-window-control-tablet:   24px;
-$size-window-control-desktop:  32px;
-
 $size-character-icon:   60px;    // karaktervalg-ikoner på startskærm
 $size-gender-icon:      56px;    // kønssymbol-knapperne
 $size-screen-fixed-height:          34rem;  // fast højde på computer-window__body (mobil) — rummer den længste scene
@@ -98,8 +94,7 @@ $font-pixel: "Micro 5", monospace;         // pixel-font til titel, overskrifter
 $font-body:  "Monomaniac One", sans-serif; // font til brødtekst og "made by Simone"
 
 // --- Typografi: skalaen bruges konsekvent i hele filen ---
-
-$font-size-sm:   0.65rem;   // VALG-knapper (mobil), eyebrow, resultat-summary-titel, POWER-tag, progress-label, valgknapper, titlebar
+$font-size-sm:   0.65rem;   // POWER-tag, progress-label, boot-tekst, feedback-titel, VALG-knapper (mobil), eyebrow, resultat-summary-titel
 $font-size-md:   0.75rem;   // primær-knapper, made-by, cyber score, scene-prompt, VALG-knapper (tablet), resultat-titel
 $font-size-body: 1rem;      // almindelig brødtekst (mobil)
 $font-size-body-lg: 1.125rem; // almindelig brødtekst (tablet/computer)
@@ -328,7 +323,7 @@ button {
 
   // Kompakte "VALG 1/2/3"-knapper i en række
   &--choice {
-    width: 100%;
+    width: 100%; // fylder hele sit <li> (som er det, der faktisk er flex-barnet)
     background: $color-btn-primary;
     color: $color-text-dark;
     font-size: $font-size-sm;
@@ -341,8 +336,8 @@ button {
     }
 
     @include respond(desktop) {
-    font-size: 1.2rem;
-    padding: $spacing-lg;
+      font-size: 1.5rem;
+      padding: $spacing-lg;
     }
 
     &:hover {
@@ -488,16 +483,21 @@ button {
       font-size: $font-size-sm;
       letter-spacing: $letter-spacing-sm;
       text-transform: uppercase;
+
+      @include respond(desktop) {
+        font-size: 1.1rem;
+      }
     }
 
     &__slides {
       width: 100%;
       position: relative;
 
-      &.is-hidden { display: none; }
+      &.is-hidden {
+        display: none;
+      }
     }
   }
-} 
 
   .intro-slide {
     display: none;
@@ -516,13 +516,13 @@ button {
   .intro-video {
     width: 100%;
     border-radius: $border-radius-sm;
-    aspect-ratio: 3 / 2;
-    image-rendering: pixelated;
+    aspect-ratio: 3 / 2; // matcher videoens 192 × 128 px
 
     &.is-hidden {
       display: none;
     }
   }
+}
 
 
 // ============================================================
@@ -546,19 +546,19 @@ button {
     align-items: center;
     padding: $spacing-xs $spacing-sm;
     font-family: $font-pixel;
-    font-size: $font-size-lg;
+    font-size: $font-size-sm;
     border-bottom: $border-width-thin solid $color-text-light;
     @include pixel-outline-text;
 
     @include respond(tablet) {
-    font-size: $font-size-lg;
-    padding: $spacing-sm $spacing-lg;
-  }
+      font-size: $font-size-md;
+      padding: $spacing-sm $spacing-md;
+    }
 
-  @include respond(desktop) {
-    font-size: $font-size-xl;
-   padding: $spacing-md $spacing-xl;
-   }
+    @include respond(desktop) {
+      font-size: 1.25rem;
+      padding: $spacing-md $spacing-lg;
+    }
   }
 
   &__controls {
@@ -591,7 +591,7 @@ button {
   width: 100%;
 }
 
-// POWER sidder ovenpå rammens nederste højre hjørne
+// POWER sidder ovenpå rammens nederste højre hjørne, ligesom på skærmbilledet
 .computer-window__power {
   position: absolute;
   bottom: 0;
@@ -599,6 +599,10 @@ button {
   font-family: $font-pixel;
   font-size: $font-size-sm;
   color: $color-text-dark;
+
+  @include respond(desktop) {
+    font-size: 1rem;
+  }
 }
 
 .window-dot {
@@ -611,16 +615,7 @@ button {
   justify-content: center;
   position: relative;
 
-  @include respond(tablet) {
-    width: $size-window-control-tablet;
-    height: $size-window-control-tablet;
-  }
-
-  @include respond(desktop) {
-    width: $size-window-control-desktop;
-    height: $size-window-control-desktop;
-  }
-
+  // Minimer-knappen: en vandret streg i bunden af boksen
   &--minimize::after {
     content: "";
     position: absolute;
@@ -631,23 +626,15 @@ button {
     background: $color-text-dark;
   }
 
+  // Luk-knappen: rød baggrund med et hvidt kryds
   &--close {
     background: $color-danger;
 
     &::before {
-      content: "\2715";
+      content: "\2715"; // ✕
       color: $color-text-light;
       font-size: $size-window-control * 0.85;
       line-height: 1;
-
-      @include respond(tablet) {
-    font-size: $size-window-control * 1.2;
-  }
-
-  @include respond(desktop) {
-    font-size: $size-window-control * 1.8;
-  }
-
     }
   }
 }
@@ -655,9 +642,13 @@ button {
 .made-by {
   margin-top: auto; // skubber teksten helt ned til bunden af skærmen
   padding-top: $spacing-sm;
-  font-size: $font-size-lg;
+  font-size: $font-size-md;
   color: $color-text-dark;
   opacity: $opacity-dim;
+
+  @include respond(desktop) {
+    font-size: 1.1rem;
+  }
 }
 
 
@@ -667,11 +658,15 @@ button {
 
 .boot {
   font-family: $font-pixel;
-  font-size: $font-size-lg;
+  font-size: $font-size-sm;
   color: $color-text-light;
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
+
+  @include respond(desktop) {
+    font-size: 1.1rem;
+  }
 
   &__progress {
     background: rgba($color-text-light, $opacity-faint);
@@ -681,12 +676,12 @@ button {
     overflow: hidden;
     margin: $spacing-sm 0;
 
-    @include respond(tablet) {       
-    height: 28px;
+    @include respond(tablet) {
+      height: 28px;
     }
 
-    @include respond(desktop) {       
-    height: 36px;
+    @include respond(desktop) {
+      height: 36px;
     }
 
     &-bar {
@@ -702,12 +697,15 @@ button {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: $font-size-lg;
+      font-size: $font-size-md;
 
-        @include respond(desktop) {     
-        font-size: 1.8rem;
-        }
+      @include respond(tablet) {
+        font-size: $font-size-lg;
+      }
 
+      @include respond(desktop) {
+        font-size: 1.5rem;
+      }
     }
   }
 
@@ -726,7 +724,7 @@ button {
   display: flex;
   justify-content: space-between;
   font-family: $font-pixel;
-  font-size: $font-size-lg;
+  font-size: $font-size-md;
   color: $color-accent-cyan;
   border-bottom: $border-width-thin solid $color-text-light;
   padding-bottom: $spacing-sm;
@@ -759,7 +757,7 @@ button {
 
   &__prompt {
     font-family: $font-pixel;
-    font-size: $font-size-lg;
+    font-size: $font-size-md;
     color: $color-accent-cyan;
     margin-bottom: $spacing-sm;
 
@@ -792,10 +790,10 @@ button {
     gap: $spacing-sm;
     padding-top: $spacing-md;
     border-top: $border-width-thin solid $color-text-light;
-  }
 
-  li{
-    flex: 1;
+    li {
+      flex: 1; // det er faktisk <li>'et, der er flex-barnet — ikke knappen selv
+    }
   }
 }
 
@@ -821,7 +819,7 @@ button {
   }
 
   @include respond(desktop) {
-    font-size: $font-size-body-lg;
+    font-size: 1.6rem;
     min-height: 12rem;
   }
 
@@ -829,6 +827,10 @@ button {
     font-family: $font-pixel;
     font-size: $font-size-sm;
     margin-bottom: $spacing-xs;
+
+    @include respond(desktop) {
+      font-size: 1rem;
+    }
   }
 
   &__indicator {
@@ -865,9 +867,17 @@ button {
 
   .scene__title {
     font-family: $font-pixel;
-    font-size: $font-size-md;
+    font-size: $font-size-lg;
     color: $color-accent-cyan;
     margin-bottom: $spacing-md;
+
+    @include respond(tablet) {
+      font-size: 2rem;
+    }
+
+    @include respond(desktop) {
+      font-size: 2.5rem;
+    }
   }
 }
 
@@ -883,9 +893,17 @@ button {
 
     &-title {
       font-family: $font-pixel;
-      font-size: $font-size-sm;
+      font-size: $font-size-md;
       color: $color-accent-cyan;
       margin-bottom: $spacing-sm;
+
+      @include respond(tablet) {
+        font-size: $font-size-lg;
+      }
+
+      @include respond(desktop) {
+        font-size: 1.75rem;
+      }
     }
   }
 

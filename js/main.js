@@ -174,6 +174,8 @@ function showScreen(screenId) {
     screen.setAttribute("aria-hidden", String(!isTarget));
   });
 
+  // #app skal have et andet højde-forhold på startskærmen (så baggrundsbilledet
+  // ikke bliver klemt) end på boot-/computer-skærmene (som har deres egen faste højde)
   document.getElementById("app").classList.toggle("app--start", screenId === "screen-start");
 
   // Indholdets højde ændrer sig fra skærm til skærm, så vi genberegner skaleringen
@@ -206,12 +208,19 @@ function fitToScreen() {
   app.style.transform = "scale(" + scale + ")";
 }
 
+// Markerer den valgte karakter som "trykket", gemmer valget,
+// og skifter den viste GIF i "stage'n" til den valgte karakter
+// Prøver at afspille startskærmens musik. Browsere blokerer ofte autoplay
+// med lyd, før brugeren har interageret med siden — derfor fanger vi fejlen
+// stille og prøver i stedet igen ved brugerens første klik/tastetryk.
 function tryPlayStartMusic() {
   startMusic.play().catch(() => {
     // Autoplay blokeret af browseren — handleFirstInteraction() prøver igen
   });
 }
 
+// Fallback: hvis autoplay blev blokeret, starter denne musikken ved
+// brugerens første interaktion — men kun mens startskærmen rent faktisk vises
 function handleFirstInteraction() {
   const startScreen = document.getElementById("screen-start");
 
@@ -220,8 +229,6 @@ function handleFirstInteraction() {
   }
 }
 
-// Markerer den valgte karakter som "trykket", gemmer valget,
-// og skifter den viste GIF i "stage'n" til den valgte karakter
 function selectCharacter(button) {
   characterButtons.forEach((btn) => {
     btn.setAttribute("aria-pressed", "false");
@@ -242,17 +249,24 @@ function startGame() {
 
   showScreen("screen-intro");
 
-      if (selectedCharacter === "2") {playIntroVideo(introVideoBoy);} 
-      else if (selectedCharacter === "1") {playIntroVideo(introVideoGirl);} 
-      else { playIntro(0);}
+  // Begge karakterer har deres egen videoversion af introfilmen.
+  // Slideshowet med stillbilleder fungerer nu kun som backup, hvis en
+  // ny karakter skulle blive tilføjet senere uden sin egen video.
+  if (selectedCharacter === "2") {
+    playIntroVideo(introVideoBoy);
+  } else if (selectedCharacter === "1") {
+    playIntroVideo(introVideoGirl);
+  } else {
+    playIntro(0);
+  }
 }
 
 // Viser introfilmens slides efter hinanden med en kort pause imellem
 function playIntro(slideIndex) {
-    introVideoGirl.classList.add("is-hidden");
-    introVideoBoy.classList.add("is-hidden");
+  introVideoBoy.classList.add("is-hidden");
+  introVideoGirl.classList.add("is-hidden");
   document.querySelector(".intro__slides").classList.remove("is-hidden");
-  
+
   introSlides.forEach((slide, index) => {
     slide.classList.toggle("is-active", index === slideIndex);
   });
@@ -266,6 +280,8 @@ function playIntro(slideIndex) {
   }
 }
 
+// Afspiller videoversionen af introfilmen for den valgte karakter (dreng eller
+// pige) og går videre til boot-skærmen, når videoen er færdig
 function playIntroVideo(video) {
   document.querySelector(".intro__slides").classList.add("is-hidden");
   introVideoBoy.classList.add("is-hidden");
@@ -278,8 +294,8 @@ function playIntroVideo(video) {
   video.addEventListener("ended", runBootSequence, { once: true });
 }
 
-// Springer introfilmen over: annullerer den ventende intro-timer først,
-// så boot-sekvensen ikke også bliver startet automatisk senere
+// Springer introfilmen over: annullerer den ventende intro-timer og stopper
+// videoen (hvis den kører), så boot-sekvensen ikke bliver startet dobbelt
 function skipIntro() {
   if (introTimeoutId !== null) {
     clearTimeout(introTimeoutId);
@@ -315,7 +331,7 @@ function runBootSequence() {
 
   let progress = 0;
   const progressStep = 5;
-  const stepDelay = 200;
+  const stepDelay = 200; // højere tal = langsommere loading-bar, mere tid til at læse
 
   const progressInterval = setInterval(() => {
     progress += progressStep;
@@ -323,7 +339,7 @@ function runBootSequence() {
     if (progress >= 100) {
       progress = 100;
       clearInterval(progressInterval);
-      setTimeout(startComputerScenario, 1500);
+      setTimeout(startComputerScenario, 1500); // ekstra pause efter 100%, før man går videre
     }
 
     bootProgressBar.style.width = progress + "%";
@@ -411,7 +427,6 @@ function showFeedback(sceneElement, choice) {
   feedbackPoints.textContent = (choice.points > 0 ? "+" : "") + choice.points + " point";
 
   nextButton.classList.remove("is-hidden");
-}
 
   // Afspil den lydeffekt, der matcher valgets farve (grøn/gul/rød)
   const sound = feedbackSounds[choice.status];
@@ -419,6 +434,7 @@ function showFeedback(sceneElement, choice) {
   sound.play().catch(() => {
     // Ingen handling nødvendig, hvis lyden af en eller anden grund ikke kan afspilles
   });
+}
 
 // Forhindrer at spilleren vælger flere gange i samme scene
 function disableChoices(sceneElement) {
@@ -485,7 +501,7 @@ function restartGame() {
     introTimeoutId = null;
   }
 
-   [introVideoBoy, introVideoGirl].forEach((video) => {
+  [introVideoBoy, introVideoGirl].forEach((video) => {
     video.pause();
     video.currentTime = 0;
     video.removeEventListener("ended", runBootSequence);
@@ -536,6 +552,8 @@ document.querySelectorAll('.scene[data-scene]').forEach((sceneElement) => {
 
 restartButton.addEventListener("click", restartGame);
 
+// Fallback for startskærmens musik: hvis autoplay bliver blokeret ved opstart,
+// starter musikken i stedet ved brugerens allerførste klik eller tastetryk
 document.addEventListener("click", handleFirstInteraction);
 document.addEventListener("keydown", handleFirstInteraction);
 

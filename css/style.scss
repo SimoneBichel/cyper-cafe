@@ -681,11 +681,11 @@ button {
     overflow: hidden;
     margin: $spacing-sm 0;
 
-    @include respond(tablet) {        // ← NY BLOK
+    @include respond(tablet) {       
     height: 28px;
     }
 
-    @include respond(desktop) {       // ← NY BLOK
+    @include respond(desktop) {       
     height: 36px;
     }
 

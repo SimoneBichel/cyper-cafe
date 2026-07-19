@@ -139,7 +139,7 @@ button {
   margin-top: 1rem;
 }
 .btn--choice {
-  flex: 1;
+  width: 100%;
   background: #f29719;
   color: #1a1a1a;
   font-size: 0.65rem;
@@ -150,6 +150,12 @@ button {
   .btn--choice {
     font-size: 0.75rem;
     padding: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .btn--choice {
+    font-size: 1.2rem;
+    padding: 1.5rem;
   }
 }
 .btn--choice:hover {
@@ -533,6 +539,9 @@ button {
   gap: 0.5rem;
   padding-top: 1rem;
   border-top: 2px solid #f5f5f5;
+}
+.scene li {
+  flex: 1;
 }
 
 .computer-window__body .btn {

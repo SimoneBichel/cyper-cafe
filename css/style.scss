@@ -328,7 +328,7 @@ button {
 
   // Kompakte "VALG 1/2/3"-knapper i en række
   &--choice {
-    flex: 1;
+    width: 100%;
     background: $color-btn-primary;
     color: $color-text-dark;
     font-size: $font-size-sm;
@@ -338,6 +338,11 @@ button {
     @include respond(tablet) {
       font-size: $font-size-md;
       padding: $spacing-md;
+    }
+
+    @include respond(desktop) {
+    font-size: 1.2rem;
+    padding: $spacing-lg;
     }
 
     &:hover {
@@ -519,7 +524,7 @@ button {
     }
   }
 
-  
+
 // ============================================================
 // 8. COMPUTER-WINDOW — delt "chrome" (boot + computer scener)
 // ============================================================
@@ -774,6 +779,10 @@ button {
     gap: $spacing-sm;
     padding-top: $spacing-md;
     border-top: $border-width-thin solid $color-text-light;
+  }
+
+  li{
+    flex: 1;
   }
 }
 

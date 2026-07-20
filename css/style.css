@@ -155,7 +155,6 @@ button {
 @media (min-width: 1024px) {
   .btn--choice {
     font-size: 1.5rem;
-    padding: 1.5rem;
   }
 }
 .btn--choice:hover {

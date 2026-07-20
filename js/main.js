@@ -431,10 +431,12 @@ function showFeedback(sceneElement, choice) {
 
   nextButton.classList.remove("is-hidden");
 
-  // Afspil den lydeffekt, der matcher valgets farve (grøn/gul/rød)
+  // Afspil den lydeffekt, der matcher valgets farve (grøn/gul/rød).
+  // Vi kloner elementet, så flere hurtige afspilninger af samme lyd
+  // (fx to grønne valg lige efter hinanden) ikke afbryder hinanden.
   const sound = feedbackSounds[choice.status];
-  sound.currentTime = 0;
-  sound.play().catch(() => {
+  const soundClone = sound.cloneNode();
+  soundClone.play().catch(() => {
     // Ingen handling nødvendig, hvis lyden af en eller anden grund ikke kan afspilles
   });
 }
@@ -486,8 +488,8 @@ function showResult() {
 
   // Afspil den lydeffekt, der matcher det opnåede resultat-niveau
   const resultSound = document.getElementById(outcome.sound);
-  resultSound.currentTime = 0;
-  resultSound.play().catch(() => {
+  const resultSoundClone = resultSound.cloneNode();
+  resultSoundClone.play().catch(() => {
     // Ingen handling nødvendig, hvis lyden af en eller anden grund ikke kan afspilles
   });
 

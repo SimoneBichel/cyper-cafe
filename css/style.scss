@@ -549,20 +549,15 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $spacing-xs $spacing-sm;
+    padding: $spacing-sm $spacing-md;
     font-family: $font-pixel;
-    font-size: $font-size-sm;
+    font-size: $font-size-lg;
     border-bottom: $border-width-thin solid $color-text-light;
     @include pixel-outline-text;
 
-    @include respond(tablet) {
-      font-size: $font-size-md;
-      padding: $spacing-sm $spacing-md;
-    }
-
     @include respond(desktop) {
-      font-size: 1.25rem;
-      padding: $spacing-md $spacing-lg;
+      font-size: 2rem;
+      padding: $spacing-sm $spacing-md;
     }
   }
 

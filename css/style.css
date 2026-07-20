@@ -215,6 +215,12 @@ button {
   background: #f29719;
   color: #1a1a1a;
 }
+@media (min-width: 1024px) {
+  .screen--start .name-input {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+}
 .screen--start .name-input::-moz-placeholder {
   color: #1a1a1a;
 }

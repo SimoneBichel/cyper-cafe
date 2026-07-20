@@ -899,16 +899,16 @@ button {
 
     &-title {
       font-family: $font-pixel;
-      font-size: $font-size-md;
+      font-size: $font-size-lg;
       color: $color-accent-cyan;
       margin-bottom: $spacing-sm;
 
       @include respond(tablet) {
-        font-size: $font-size-lg;
+        font-size: 2rem;
       }
 
       @include respond(desktop) {
-        font-size: 1.75rem;
+        font-size: $font-size-xl;
       }
     }
   }
@@ -919,6 +919,16 @@ button {
     flex-direction: column;
     gap: $spacing-xs;
 
+    font-size: $font-size-body;    
+
+    @include respond(tablet) {          
+    font-size: $font-size-body-lg;
+    }
+
+    @include respond(desktop) {         
+    font-size: 1.6rem;
+    }
+
     li {
       display: flex;
       align-items: center;
@@ -928,6 +938,16 @@ button {
         content: "";
         @include status-dot;
         background: var(--dot-color, #{$color-success}); // JS sætter --dot-color pr. linje
+
+        @include respond(tablet) {      
+        width: 14px;
+        height: 14px;
+      }
+
+      @include respond(desktop) {    
+        width: 18px;
+        height: 18px;
+      }
       }
     }
   }

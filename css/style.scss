@@ -883,6 +883,14 @@ button {
   &__heading {
     font-size: $font-size-lg;
     margin-bottom: $spacing-md;
+
+     @include respond(tablet) {   
+    font-size: 2rem;
+    }
+
+    @include respond(desktop) {    
+    font-size: 2.75rem;
+    }
   }
 
   &__summary {

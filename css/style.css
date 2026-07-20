@@ -637,6 +637,16 @@ button {
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
+@media (min-width: 768px) {
+  .result__heading {
+    font-size: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .result__heading {
+    font-size: 2.75rem;
+  }
+}
 .result__summary {
   text-align: left;
   margin-bottom: 1rem;

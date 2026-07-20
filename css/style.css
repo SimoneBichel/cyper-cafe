@@ -118,6 +118,18 @@ button {
   font-size: 1rem;
   padding: 0.5rem 1rem;
 }
+@media (min-width: 768px) {
+  .btn--primary {
+    font-size: 1.125rem;
+    padding: 1rem 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .btn--primary {
+    font-size: 1.5rem;
+    padding: 1rem 2.5rem;
+  }
+}
 .btn--primary:hover {
   background: #d6862a;
 }

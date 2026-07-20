@@ -295,6 +295,16 @@ button {
     font-size: $font-size-body;
     padding: $spacing-sm $spacing-md;
 
+    @include respond(tablet) {
+      font-size: $font-size-body-lg;
+      padding: $spacing-md $spacing-lg;
+    }
+
+    @include respond(desktop) {
+      font-size: 1.5rem;
+      padding: $spacing-md $spacing-xl;
+    }
+
     &:hover {
       background: $color-btn-primary-hover;
     }

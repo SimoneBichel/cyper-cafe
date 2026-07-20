@@ -663,15 +663,11 @@ button {
 
 .boot {
   font-family: $font-pixel;
-  font-size: $font-size-sm;
+  font-size: $font-size-lg;
   color: $color-text-light;
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
-
-  @include respond(desktop) {
-    font-size: 1.1rem;
-  }
 
   &__progress {
     background: rgba($color-text-light, $opacity-faint);
@@ -729,15 +725,12 @@ button {
   display: flex;
   justify-content: space-between;
   font-family: $font-pixel;
-  font-size: $font-size-md;
+  font-size: $font-size-lg;
   color: $color-accent-cyan;
   border-bottom: $border-width-thin solid $color-text-light;
   padding-bottom: $spacing-sm;
   margin-bottom: $spacing-md;
 
-  @include respond(tablet) {
-    font-size: $font-size-lg;
-  }
 
   @include respond(desktop) {
     font-size: 2.1rem; // endnu et trin op, ligesom .page-title har mobil/tablet/computer
@@ -762,13 +755,9 @@ button {
 
   &__prompt {
     font-family: $font-pixel;
-    font-size: $font-size-md;
+    font-size: $font-size-lg;
     color: $color-accent-cyan;
     margin-bottom: $spacing-sm;
-
-    @include respond(tablet) {
-      font-size: $font-size-lg;
-    }
 
     @include respond(desktop) {
       font-size: 2.1rem;
